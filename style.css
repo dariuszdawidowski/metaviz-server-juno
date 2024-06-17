@@ -1,0 +1,426 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap');
+
+:root {
+    --metaviz-color-cyan: rgb(65, 192, 240);
+    --canvas-bg-color: #dddfe1;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    margin: 0;
+    cursor: normal;
+    background-color: var(--canvas-bg-color);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: none;
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* App main container */
+
+#app {
+    height: 100%;
+    width: 100%;
+}
+
+/* Background */
+
+.panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 640px;
+    height: 100%;
+    min-height: 480px;
+}
+
+/* Middle frame */
+
+.frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    padding: 10px 40px 40px 40px;
+    box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+    margin: 15px;
+    text-align: center;
+    width: 285px;
+}
+
+/* Login */
+
+.frame .info {
+    color: #555;
+    font-size: 12px;
+    margin: 14px auto;
+}
+
+.frame .login-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.frame .login-buttons .mdi {
+    color: #5a5a5a;
+    margin-left: 4px;
+}
+
+.frame .login-buttons .mdi:hover {
+    cursor: pointer;
+}
+
+.frame button {
+    outline: none;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    margin: 2px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-wieght: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: 0.2s linear;
+    color: white;
+    background: var(--metaviz-color-cyan);
+}
+
+.frame button:hover {
+    cursor: pointer;
+    background: #8edaf6;
+    box-shadow: 0 0 12px rgb(0 0 0 / 10%);
+}
+
+/* Sidebar */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 32px;
+    height: calc(100% - 50px);
+    margin: 15px;
+    padding: 10px;
+    color: white;
+    background-color: #111517;
+    border-radius: 8px;
+}
+
+.sidebar .text {
+    font-size: 12px;
+    margin: 2px;
+    max-width: 60px;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow-x: hidden;
+}
+
+.sidebar .icon {
+    color: #ddd;
+    font-size: 28px;
+    margin: 8px;
+}
+
+.sidebar .icon:hover {
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Infobar */
+
+.infobar {
+    width: 20%;
+    height: calc(100% - 30px);
+    margin: 15px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.tablet {
+    width: calc(100% - 40px);
+    border-radius: 8px;
+    background-color: white;
+    margin: 0 0 15px 0;
+    padding: 20px;
+}
+
+.square {
+    aspect-ratio: 1 / 1;
+    height: auto;
+}
+
+.tablet h1 {
+    color: #000;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.tablet h2 {
+    color: #aaa;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+.tablet h2 span {
+    color: #000;
+    font-size: 18px;
+}
+
+.tablet div {
+    color: #000;
+    font-size: 12px;
+}
+
+/* Boards */
+
+.boards {
+    width: 70%;
+    height: calc(100% - 30px);
+    margin: 15px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding-right: 15px;
+}
+
+.boards .group {
+    position: relative;
+    border-radius: 8px;
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.boards .group h1 {
+    font-size: 20px;
+    margin-top: 0;
+    border-bottom: 5px solid black;
+    width: 32%;
+}
+
+.boards .group .dots {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.boards .group .dots:hover {
+    cursor: pointer;
+    color: var(--metaviz-color-cyan);
+}
+
+.boards .click {
+    margin: 8px 0 9px 4px;
+}
+
+.boards .section {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* Topbar */
+
+.topbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: calc(100% - 40px);
+    height: 24px;
+    margin-bottom: 15px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #111517;   
+    font-size: 12px;
+    border-radius: 8px;
+}
+
+/* Link to board */
+
+.board-link {
+    position: relative;
+    width: 100px;
+    height: 60px;
+    background-image: url(//cdn1.metaviz.net/typo-arrow.svg);
+    background-size: 40px 40px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+a .board-link, a:visited .board-link {
+    color: #555;
+}
+
+.board-link:hover, a:visited .board-link:hover {
+    cursor: pointer;
+    color: var(--metaviz-color-cyan);
+    background-image: url(//cdn1.metaviz.net/typo-arrow-cyan.svg);
+}
+
+.board-link-date {
+    position: absolute;
+    left: 15px;
+    top: 17px;
+    transform: rotate(-90deg);
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.board-link-name {
+    position: absolute;
+    top: 51px;
+    left: 5px;
+    overflow: clip;
+    text-overflow: ellipsis;
+    width: 90px;
+    height: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.board-add {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 23px;
+    color: #000;
+}
+
+.board-add:hover {
+    cursor: pointer;
+    color: var(--metaviz-color-cyan);
+}
+
+.board-add .plus {
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.board-add .add {
+    font-size: 12px;
+}
+
+.board-add input {
+    width: 200px;
+    height: 24px;
+    font-size: 12px;
+    outline-width: 0;
+    padding: 0px 6px;
+}
+
+.board-add button {
+    color: #fff;
+    background-color: #000;
+    padding: 0px 6px;
+    width: 50px;
+    height: 28px;
+    border: 0;
+}
+
+.board-add button:hover {
+    cursor: pointer;
+    background-color: var(--metaviz-color-cyan);
+}
+
+/* Wizard */
+
+.total-popup-window {
+    position: absolute;
+    display: grid;
+    grid-template-columns: 4px auto 4px;
+    grid-template-rows: 4px auto 4px;
+    width: 640px;
+    height: 350px;
+    left: 0;
+    top: 0;
+    transform: translate(calc(50% - 160px), 50%);
+}
+
+.total-popup-window .content {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
+.wizard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 1150px;
+    margin-top: 20px;
+}
+
+.wizard .step {
+    width: 200px;
+    height: 200px;
+    background-color: white;
+    border-radius: 24px;
+    margin: 16px;
+    padding: 16px;
+    box-shadow: 0 0 100px rgba(0,0,0,0.06);
+}
+
+.wizard .step .nr {
+    margin: -44px auto 25px auto;
+    text-align: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #555;
+    border-radius: 50%;
+    width: 19px;
+    height: 19px;
+    line-height: 19px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.wizard .step .title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.wizard .step .image {
+    text-align: center;
+    margin: 15px;
+}
+
+.wizard .step .desc {
+    text-align: justify;
+    font-size: 13px;
+}
+
+.wizard .arrow {
+    display: inline-block;
+    font-size: 40px;
+    color: #555;
+    text-shadow: 0 0 10px rgba(0,0,0,0.08);
+}
+
+.wizard .arrow:hover {
+    cursor: pointer;
+}
