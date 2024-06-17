@@ -196,7 +196,7 @@ const update = async () => {
         return acc + blob.size;
     }, 0);
 
-    const codeSize = 1990656;
+    const codeSize = 39258685;
 
     // Data storage cost
     const price = calculateCosts({storage: (catSize + boardsSize), currency: 'C', nodes: 13})
