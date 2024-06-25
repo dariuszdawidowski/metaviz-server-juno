@@ -199,7 +199,6 @@ const update = async () => {
 
     // Data storage cost
     const price = calculateCosts({storage: (catSize + boardsSize), currency: 'C', nodes: 13})
-    console.log(typeof(price.storage.USD.toFixed(2)))
     document.querySelector('#storage-expenses').innerHTML = `total of ${bytes2Human(codeSize + catSize + boardsSize)} | monthly ${formatCycles(price.storage.CYCLES)}<br>@ 13-nodes`;
     document.querySelector('#storage-expenses-usd').innerHTML = `$${Math.max(price.storage.USD, 0.01).toFixed(2)}`;
     // Data storage usage
