@@ -1,11 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { listDocs, setDoc, getDoc, deleteDoc, deleteManyDocs } from '@junobuild/core';
 import { jsonReplacer, jsonReviver } from '@junobuild/utils';
-// import { satelliteMemorySize } from '@junobuild/admin';
 import { renderAdd } from './add';
 import { renderSidebar } from './sidebar';
 import { renderTopbar } from './topbar';
-import { addEventClick, cleanString, padToTwoDigits, bytes2Human, formatCycles, calculateCosts } from '../utils';
+import { padToTwoDigits, bytes2Human, formatCycles, calculateCosts } from '../utils';
 
 const showSpinner = () => {
     document.getElementById('metaviz-spinner').style.display = 'block';
@@ -26,7 +25,7 @@ const renderPanels = (args) => {
                 <div id="storage-expenses"></div>
             </div>
             <div class="tablet">
-                <div style="text-align: center;">Metaviz v0.9.18 @ IC backend v0.4.1</div>
+                <div style="text-align: center;">Metaviz v0.9.18 @ IC backend v0.6.0</div>
             </div>
         </div>
     `;
@@ -269,7 +268,7 @@ const update = async () => {
 
 };
 
-export const renderBoards = (app) => {
+export const renderDashboard = (app) => {
 
     // Selected category id by menu
     let selectedCategory = null;

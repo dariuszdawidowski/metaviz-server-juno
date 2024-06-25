@@ -1,5 +1,6 @@
 import { authSubscribe, initSatellite } from '@junobuild/core';
-import { renderBoards } from './dashboard/boards';
+import { renderBoard } from './board/render';
+import { renderDashboard } from './dashboard/boards';
 import { renderLogin } from './login/login';
 import '../../metaviz-editor/style/metaviz.css';
 import '../../metaviz-editor/style/popup.css';
@@ -17,7 +18,16 @@ authSubscribe((user) => {
         return;
     }
 
-    renderBoards(app);
+    // Read URL params
+    const url = new URL(window.location.href);
+    const params = new URLSearchParams(url.search);
+
+    if (params.has('board')) {
+        renderBoard(app);
+    }
+    else {
+        renderDashboard(app);
+    }
 });
 
 /**
