@@ -56,7 +56,8 @@ const addBoard = async (name, categoryId) => {
             key: uuidv4(),
             data: {
                 name,
-                category: categoryId
+                category: categoryId,
+                json: null
             }
         }
     });
