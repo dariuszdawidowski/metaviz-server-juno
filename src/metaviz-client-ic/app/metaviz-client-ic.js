@@ -1,4 +1,4 @@
-// Metaviz global structure
+// Metaviz main app
 
 class MetavizClientIC extends Metaviz {
 }
