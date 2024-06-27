@@ -27,22 +27,42 @@ class MetavizEditorIC extends MetavizEditorBrowser {
      */
 
     async open() {
-        // const docs = await listDocs({
-        //     collection: 'boards'
-        // });
-        // console.log('docs', docs);
 
         if (this.id) {
+
+            this.busy();
+
             const doc = await getDoc({
                 collection: 'boards',
                 key: this.id
             });
+
             if (doc) {
+
+                // Set properties
                 this.setBoardName(doc.data.name);
                 this.category = doc.data.category;
-                console.log('doc', doc);            
+                this.version = doc.version;
+
+                // If error - show alert
+                if ('error' in doc.data.json) alert(doc.data.json.error);
+
+                // Decode data
+                metaviz.format.deserialize('text/metaviz+json', doc.data.json);
+
+                // Ready
+                this.idle();
+
+                // Launch start
+                for (const node of metaviz.render.nodes.get('*')) node.start();
+
+                // Dispatch final event
+                metaviz.events.call('on:loaded');
+
             }
+
             else {
+                this.idle();
                 alert('This board does not exist! Check your URL.')
             }
 
@@ -70,7 +90,8 @@ class MetavizEditorIC extends MetavizEditorBrowser {
                     category: this.category,
                     name: this.name,
                     json
-                }
+                },
+                version: this.version
             }
         });
 

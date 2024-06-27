@@ -341,6 +341,7 @@ export const renderDashboard = (app) => {
         id: 'open-board',
         name: '📝 Open board',
         onClick: () => {
+            window.open(`?board=${selectedBoard}`, '_blank');
         }
     });
     menuBoard.addItem({
@@ -349,6 +350,7 @@ export const renderDashboard = (app) => {
         name: '❌ Delete board',
         onClick: () => {
             if (confirm('Are you sure to delete this board?')) {
+                showSpinner();
                 getDoc({
                     collection: 'boards',
                     key: selectedBoard
@@ -357,6 +359,7 @@ export const renderDashboard = (app) => {
                         collection: 'boards',
                         doc: myDoc
                     }).then(() => {
+                        hideSpinner();
                         update();
                     });
                 });
