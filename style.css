@@ -48,7 +48,7 @@ body {
 
 /* Middle frame */
 
-.frame {
+.midframe {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,29 +62,29 @@ body {
 
 /* Login */
 
-.frame .info {
+.midframe .info {
     color: #555;
     font-size: 12px;
     margin: 14px auto;
 }
 
-.frame .login-buttons {
+.midframe .login-buttons {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.frame .login-buttons .mdi {
+.midframe .login-buttons .mdi {
     color: #5a5a5a;
     margin-left: 4px;
 }
 
-.frame .login-buttons .mdi:hover {
+.midframe .login-buttons .mdi:hover {
     cursor: pointer;
 }
 
-.frame button {
+.midframe button {
     outline: none;
     display: flex;
     justify-content: flex-start;
@@ -103,7 +103,7 @@ body {
     background: var(--metaviz-color-cyan);
 }
 
-.frame button:hover {
+.midframe button:hover {
     cursor: pointer;
     background: #8edaf6;
     box-shadow: 0 0 12px rgb(0 0 0 / 10%);

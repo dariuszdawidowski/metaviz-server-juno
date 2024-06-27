@@ -56,6 +56,9 @@ class MetavizEditorIC extends MetavizEditorBrowser {
                 // Launch start
                 for (const node of metaviz.render.nodes.get('*')) node.start();
 
+                // Update
+                metaviz.render.update();
+
                 // Dispatch final event
                 metaviz.events.call('on:loaded');
 

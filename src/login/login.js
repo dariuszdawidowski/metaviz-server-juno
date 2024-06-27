@@ -4,13 +4,13 @@ import { aboutInternetIdentity } from './about-ii.js';
 import { aboutNFID } from './about-nfid.js';
 
 const showSpinner = () => {
-    const frame = document.querySelector('#app > .panel > .frame')
+    const frame = document.querySelector('#app > .panel > .midframe');
     if (frame) frame.style.opacity = '0.3';
     document.getElementById('metaviz-spinner').style.display = 'block';
 };
 
 const hideSpinner = () => {
-    const frame = document.querySelector('#app > .panel > .frame')
+    const frame = document.querySelector('#app > .panel > .midframe');
     if (frame) frame.style.opacity = '1.0';
     document.getElementById('metaviz-spinner').style.display = 'none';
 };
@@ -61,7 +61,7 @@ export const renderLogin = (app) => {
 
     app.innerHTML = `
         <div class="panel">
-            <div class="frame">
+            <div class="midframe">
                 <img class="metaviz-logo" src="//cdn1.metaviz.net/metaviz-mark-color-rgba.png" width="64" height="64" style="margin-bottom: 6px;">
                 <div class="info">Select a login method:</div>
                 <div class="login-buttons">
