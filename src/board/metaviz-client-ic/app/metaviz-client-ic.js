@@ -2,3 +2,5 @@
 
 class MetavizClientIC extends Metaviz {
 }
+
+export default MetavizClientIC;

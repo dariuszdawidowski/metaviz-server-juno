@@ -1,7 +1,7 @@
 import { signIn, InternetIdentityProvider, NFIDProvider } from '@junobuild/core';
-import { addEventClick } from '../utils';
-import { aboutInternetIdentity } from './about-ii';
-import { aboutNFID } from './about-nfid';
+import { addEventClick } from '../utils.js';
+import { aboutInternetIdentity } from './about-ii.js';
+import { aboutNFID } from './about-nfid.js';
 
 const showSpinner = () => {
     const frame = document.querySelector('#app > .panel > .frame')

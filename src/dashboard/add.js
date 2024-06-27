@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { addEventClick, cleanString } from '../utils';
+import { addEventClick, cleanString } from '../utils.js';
 
 export const renderAdd = (app, args) => {
 

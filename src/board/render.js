@@ -1,7 +1,9 @@
+import MetavizClientIC from './metaviz-client-ic/app/metaviz-client-ic.js';
+
 export const renderBoard = (app) => {
     app.innerHTML = '';
 
-    metaviz = new Metaviz();
+    metaviz = new MetavizClientIC();
     metaviz.build = document.querySelector('meta[name="metaviz:build:version"]')?.content;
     global.cache['MetavizNodeImage'] = {
         formats: ['image/jpeg', 'image/png', 'image/apng', 'image/gif', 'image/webp', 'image/x-icon', 'image/svg+xml'],

@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { listDocs, setDoc, getDoc, deleteDoc, deleteManyDocs } from '@junobuild/core';
 import { jsonReplacer, jsonReviver } from '@junobuild/utils';
-import { renderAdd } from './add';
-import { renderSidebar } from './sidebar';
-import { renderTopbar } from './topbar';
-import { padToTwoDigits, bytes2Human, formatCycles, calculateCosts } from '../utils';
+import { renderAdd } from './add.js';
+import { renderSidebar } from './sidebar.js';
+import { renderTopbar } from './topbar.js';
+import { padToTwoDigits, bytes2Human, formatCycles, calculateCosts } from '../utils.js';
 
 const showSpinner = () => {
     document.getElementById('metaviz-spinner').style.display = 'block';

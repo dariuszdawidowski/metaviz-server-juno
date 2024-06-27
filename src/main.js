@@ -1,7 +1,7 @@
 import { authSubscribe, initSatellite } from '@junobuild/core';
-import { renderBoard } from './board/render';
-import { renderDashboard } from './dashboard/boards';
-import { renderLogin } from './login/login';
+import { renderBoard } from './board/render.js';
+import { renderDashboard } from './dashboard/boards.js';
+import { renderLogin } from './login/login.js';
 import '../../metaviz-editor/style/metaviz.css';
 import '../../metaviz-editor/style/popup.css';
 import '../style.css';

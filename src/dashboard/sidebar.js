@@ -1,4 +1,4 @@
-import { renderLogout } from './logout';
+import { renderLogout } from './logout.js';
 
 export const renderSidebar = (app) => {
 
