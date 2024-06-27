@@ -1,5 +1,7 @@
 // Metaviz main app
 
+import MetavizEditorIC from '../editor/editor.js';
+
 class MetavizClientIC extends Metaviz {
 
     /**
@@ -65,7 +67,46 @@ class MetavizClientIC extends Metaviz {
         };
         this.exchange = new MetavizExchange();
         this.events = new MetavizEventManager();
-        this.editor = new MetavizEditorBrowser();
+        this.editor = new MetavizEditorIC();
+    }
+
+    /**
+     * Start everything
+     * @param boardID: optional string with uuid of the board to fetch (also can be passed in url get param)
+     */
+
+    start(boardID = null) {
+
+        // Start editor
+        this.editor.start();
+
+        // For browser
+        if (this.agent.client == 'browser') {
+
+            // Theme
+            const theme = localStorage.getItem('metaviz.config.theme') || 'Iron';
+            this.container.element.classList.add('theme-' + theme.toLowerCase());
+            for (const [key, value] of Object.entries(global.registry.themes[theme].vars)) {
+                document.documentElement.style.setProperty(key, value);
+            }
+
+            // Cookie info
+            if (this.agent.server != '') {
+                this.editor.showCookieBubble({
+                    text: `${_('Site use cookies')} <a href='https://www.metaviz.net/privacy-policy/clientpro/' target='_blank'>${_('Click here to read the Privacy Policy')}.</a> <input type="checkbox" onchange="metaviz.editor.hideCookieBubbleForever(this)"> ${_('Dont show again')}`,
+                    position: 'bottom-center'
+                });
+            }
+
+            // Server
+            if (this.agent.server) {
+
+                // Initial load board json data
+                this.editor.open(boardID);
+
+            }
+
+        }
     }
 
 }
