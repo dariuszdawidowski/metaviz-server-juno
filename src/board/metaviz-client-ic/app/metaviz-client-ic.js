@@ -1,6 +1,7 @@
 // Metaviz main app
 
 import MetavizEditorIC from '../editor/editor.js';
+import MetavizExchangeIC from '../editor/exchange.js';
 
 class MetavizClientIC extends Metaviz {
 
@@ -61,11 +62,7 @@ class MetavizClientIC extends Metaviz {
             nodes: new MetavizNodesManager(),
             links: new MetavizLinksManager()
         });
-        this.ajax = {
-            in: new MetavizInAjax(),
-            out: null //new MetavizOutAjax()
-        };
-        this.exchange = new MetavizExchange();
+        this.exchange = new MetavizExchangeIC();
         this.events = new MetavizEventManager();
         this.editor = new MetavizEditorIC();
     }

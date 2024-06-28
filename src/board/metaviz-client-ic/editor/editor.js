@@ -105,6 +105,44 @@ class MetavizEditorIC extends MetavizEditorBrowser {
 
     }
 
+    /**
+     * Create node (copy)
+     * nodeType: <string> class name
+     * transform: {x: ..., y: ...}
+     * params: {param1: ..., param2: ...} [optional]
+     */
+
+    nodeAdd(nodeType, transform, params = {}) {
+
+        // Position
+        let position = metaviz.render.screen2World(transform);
+        if (metaviz.config.snap.grid.enabled) position = this.snapToGrid(position.x, position.y);
+
+        // Create node
+        const newNode = metaviz.render.nodes.add({id: crypto.randomUUID(), parent: metaviz.render.nodes.parent, type: nodeType, ...position, params});
+
+        // Update
+        newNode.render();
+        newNode.update();
+        newNode.start();
+
+        // Store
+        this.history.clearFuture();
+        this.history.store({action: 'add', nodes: [newNode.serialize('transform')]});
+
+        // Link if node chaining is active
+        if (this.interaction.chainNode) {
+            this.dragLinkEnd(newNode);
+            this.interaction.clear();
+        }
+
+        // Show info
+        this.checkEmpty();
+
+        // Return fres created node
+        return newNode;
+    }
+
 }
 
 export default MetavizEditorIC;
