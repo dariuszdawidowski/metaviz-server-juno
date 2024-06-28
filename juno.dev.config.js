@@ -35,13 +35,13 @@ export default defineDevConfig(() => ({
 
             ],
             storage: [
-                // {
-                //     collection: 'images',
-                //     read: 'managed',
-                //     write: 'managed',
-                //     memory: 'stable',
-                //     mutablePermissions: true
-                // }
+                {
+                    collection: 'images',
+                    read: 'managed',
+                    write: 'managed',
+                    memory: 'stable',
+                    mutablePermissions: true
+                }
             ]
         }
     }

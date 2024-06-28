@@ -1,5 +1,8 @@
 // File data transfer
 
+import { v4 as uuidv4 } from 'uuid';
+import { uploadFile } from '@junobuild/core';
+
 class MetavizExchangeIC extends MetavizExchange {
 
     /**
@@ -56,8 +59,37 @@ class MetavizExchangeIC extends MetavizExchange {
      * onLoad: callback (optional)
      */
 
-    sendBlob(file, node, onLoad = null) {
-        console.log('sendBlob...')
+    async sendBlob(file, node, onLoad = null) {
+
+        // Show spinner
+        node.controls.spinner.show();
+
+        const result = await uploadFile({
+            data: file,
+            collection: 'images',
+            token: uuidv4()
+        });
+        // console.log('result', result);
+
+        // Set URI (file/image) and resolution (image)
+        node.params.set('uri', result.downloadUrl);
+        if (this.detectImage(file.type)) {
+            node.options.uri.set(result.downloadUrl);
+            // node.params.set('resX', json.resX);
+            // node.params.set('resY', json.resY);
+            // node.params.set('rotate', json.rotate);
+            metaviz.editor.history.store({
+                action: 'param',
+                node: {id: node.id},
+                params: {uri: result.downloadUrl},
+            });
+        }
+
+        // Hide spinner
+        node.controls.spinner.hide();
+
+        // Callback
+        if (onLoad) onLoad();
     }
 
 }

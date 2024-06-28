@@ -1,7 +1,7 @@
 // Editor
 
 import { v4 as uuidv4 } from 'uuid';
-import { setDoc, getDoc, listDocs } from '@junobuild/core';
+import { setDoc, getDoc, listDocs, listAssets } from '@junobuild/core';
 
 class MetavizEditorIC extends MetavizEditorBrowser {
 
@@ -27,6 +27,11 @@ class MetavizEditorIC extends MetavizEditorBrowser {
      */
 
     async open() {
+
+        /*const myList = await listAssets({
+            collection: "images",
+        });
+        console.log('assets', myList)*/
 
         if (this.id) {
 
