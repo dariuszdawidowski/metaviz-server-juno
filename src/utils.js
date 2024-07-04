@@ -75,31 +75,3 @@ export const formatCycles = (num) => {
     }
     return num.toFixed() + suffixes[suffixIndex];
 };
-
-/**
- * Calculate storage costs
- * @param args.storage: Number - site to calculate in bytes
- * @param args.nodes: int - 13 | 34 nodes sunbet
- */
-
-export const calculateCosts = (args) => {
-    const costs = {};
-
-    // Storage
-    if ('storage' in args && 'nodes' in args) {
-
-        costs['storage'] = {CYCLES: 0, USD: 0};
-
-        const nodesCost = {13: 127000}
-        const cycles1GBperMonth = nodesCost[args.nodes];
-        const oneGiB = 1073741824;
-        const cycles1BperSecond = cycles1GBperMonth / oneGiB;
-        const secondsInMonth = 30 * 24 * 60 * 60;
-        costs['storage']['CYCLES'] = args.storage * cycles1BperSecond * secondsInMonth;
-        const usdBytesPerMonth = 0.000000000388;
-        costs['storage']['USD'] = args.storage * usdBytesPerMonth;
-
-    }
-
-    return costs;
-}
