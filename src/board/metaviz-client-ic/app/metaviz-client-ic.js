@@ -52,11 +52,6 @@ class MetavizClientIC extends Metaviz {
             in: null,
             out: new MetavizOutSVG()
         });
-        // TODO: remove storage
-        this.storage = {
-            filesystem: new MetavizFilesystem(),
-            db: new MetavizIndexedDB()
-        };
         this.render = new MetavizEditorRender({
             container: this.container.element,
             nodes: new MetavizNodesManager(),
