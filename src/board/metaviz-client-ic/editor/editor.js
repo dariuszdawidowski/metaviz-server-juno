@@ -1,7 +1,7 @@
 // Editor
 
 import { v4 as uuidv4 } from 'uuid';
-import { setDoc, getDoc, listDocs, listAssets } from '@junobuild/core';
+import { setDoc, getDoc, listAssets, deleteManyAssets } from '@junobuild/core';
 
 class MetavizEditorIC extends MetavizEditorBrowser {
 
@@ -27,11 +27,6 @@ class MetavizEditorIC extends MetavizEditorBrowser {
      */
 
     async open() {
-
-        // const myList = await listAssets({
-        //     collection: 'files',
-        // });
-        // console.log('assets', myList)
 
         if (this.id) {
 
@@ -105,9 +100,44 @@ class MetavizEditorIC extends MetavizEditorBrowser {
             }
         });
 
+        // Purge old media files
+        await this.purge();
+
         // Spinner
         this.idle();
 
+    }
+
+    /**
+     * Delete old media+files
+     */
+
+    async purge() {
+        const hour = 3600 * 1000;
+        const expired = 3 * hour * 24;
+        const now = new Date().getTime();
+        const files = await listAssets({
+            collection: 'files',
+        });
+        // console.log('files', files)
+        const toDelete = [];
+        files.assets.forEach(file => {
+            if (now - Number(file.updated_at / 1000000n) > expired) {
+                toDelete.push(file.fullPath);
+                // toDelete.push(new Promise(resolve => deleteAsset({ collection: 'files', storageFile: file.fullPath }).then(resolve())));
+            }
+        });
+        // await Promise.all(toDelete);
+        // console.log('toDelete', toDelete)
+        await deleteManyAssets({ docs: toDelete });
+        // await deleteAsset({ collection: 'files', storageFile: "/files/Submissions.pdf" })
+        // toDelete.forEach(file => {
+        //     console.log('del:', file)
+        //     deleteAsset({
+        //         collection: 'files',
+        //         storageFile: file
+        //     });
+        // });
     }
 
     /**
