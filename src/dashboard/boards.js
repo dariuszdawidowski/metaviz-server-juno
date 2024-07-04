@@ -26,6 +26,12 @@ const renderPanels = (args) => {
             </div>
             <div class="tablet">
                 <div style="text-align: center;">Metaviz v0.9.18 @ IC backend v0.6.0</div>
+                <div class="powered-by-icp">
+                    Powered by<br>
+                    <a href="https://internetcomputer.org" target="_blank">
+                        <img src="/media/internet-computer-icp-logo.svg" style="width: 18px; margin-right: 1px;"> Internet Computer
+                    </a>
+                </div>
             </div>
         </div>
     `;
