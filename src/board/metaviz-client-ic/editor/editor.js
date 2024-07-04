@@ -28,10 +28,10 @@ class MetavizEditorIC extends MetavizEditorBrowser {
 
     async open() {
 
-        const myList = await listAssets({
-            collection: 'files',
-        });
-        console.log('assets', myList)
+        // const myList = await listAssets({
+        //     collection: 'files',
+        // });
+        // console.log('assets', myList)
 
         if (this.id) {
 

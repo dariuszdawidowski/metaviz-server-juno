@@ -21,13 +21,19 @@ const calculateSize = (args) => {
         return acc + blob.size;
     }, 0);
 
+    const filesSize = args.files.assets.reduce((acc, file) => {
+        return acc + Number(file.encodings.identity.total_length);
+    }, 0);
+
     const codeSize = 39258685;
 
     return {
         categories: categoriesSize,
         boards: boardsSize,
+        files: filesSize,
+        filesCount: args.files.assets.length,
         code: codeSize,
-        total: categoriesSize + boardsSize + codeSize
+        total: categoriesSize + boardsSize + filesSize + codeSize
     };
 };
 
@@ -91,6 +97,7 @@ export const renderPanelExpenses = (app) => {
  * Update
  * @param args.categories: list of Docs - listed categories
  * @param args.boards: list of Docs - listed boards
+ * @param args.files: list of Docs - listed files
  */
 
 export const updatePanelExpenses = (args) => {
@@ -100,7 +107,7 @@ export const updatePanelExpenses = (args) => {
 
     // Data storage cost
     const price = calculateCosts({storage: size.total, currency: 'C', nodes: 13})
-    document.querySelector('#storage-expenses').innerHTML = `total of ${bytes2Human(size.total)} | monthly ${formatCycles(price.storage.CYCLES)}`;
+    document.querySelector('#storage-expenses').innerHTML = `total of ${bytes2Human(size.total)} | monthly ${formatCycles(price.storage.CYCLES)}<br>including ${bytes2Human(size.files)} in ${size.filesCount} media+files`;
     document.querySelector('#storage-expenses-usd').innerHTML = `$${Math.max(price.storage.USD, 0.01).toFixed(2)}`;
 
     // Data storage usage

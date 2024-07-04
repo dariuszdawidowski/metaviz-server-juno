@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { listDocs, setDoc, getDoc, deleteDoc, deleteManyDocs } from '@junobuild/core';
+import { listDocs, setDoc, getDoc, deleteDoc, deleteManyDocs, listAssets } from '@junobuild/core';
 import { renderAdd } from './add.js';
 import { renderPanelExpenses, updatePanelExpenses } from './expenses.js';
 import { renderSidebar } from './sidebar.js';
@@ -296,14 +296,18 @@ export const renderDashboard = (app) => {
 
 const updateDashboard = async () => {
 
+    // Query data
     const categories = await listDocs({
         collection: 'categories'
     });
-
     const boards = await listDocs({
         collection: 'boards'
     });
+    const files = await listAssets({
+        collection: 'files',
+    });
 
+    // Recent files
     const recentBoards = boards.items.toSorted((a, b) => {
         if (a.updated_at > b.updated_at) return -1;
         if (a.updated_at < b.updated_at) return 1;
@@ -340,7 +344,7 @@ const updateDashboard = async () => {
     }
 
     // Info Panel Consumption and Expenses
-    updatePanelExpenses({categories, boards});
+    updatePanelExpenses({categories, boards, files});
 
 };
 
