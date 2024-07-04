@@ -36,7 +36,7 @@ export default defineDevConfig(() => ({
             ],
             storage: [
                 {
-                    collection: 'images',
+                    collection: 'files',
                     read: 'managed',
                     write: 'managed',
                     memory: 'stable',

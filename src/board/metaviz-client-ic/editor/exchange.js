@@ -66,10 +66,9 @@ class MetavizExchangeIC extends MetavizExchange {
 
         const result = await uploadFile({
             data: file,
-            collection: 'images',
+            collection: 'files',
             token: uuidv4()
         });
-        // console.log('result', result);
 
         // Set URI (file/image) and resolution (image)
         node.params.set('uri', result.downloadUrl);
