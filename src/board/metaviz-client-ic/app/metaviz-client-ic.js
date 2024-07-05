@@ -72,33 +72,25 @@ class MetavizClientIC extends Metaviz {
         // Start editor
         this.editor.start();
 
-        // For browser
-        if (this.agent.client == 'browser') {
-
-            // Theme
-            const theme = localStorage.getItem('metaviz.config.theme') || 'Iron';
-            this.container.element.classList.add('theme-' + theme.toLowerCase());
-            for (const [key, value] of Object.entries(global.registry.themes[theme].vars)) {
-                document.documentElement.style.setProperty(key, value);
-            }
-
-            // Cookie info
-            if (this.agent.server != '') {
-                this.editor.showCookieBubble({
-                    text: `${_('Site use cookies')} <a href='https://www.metaviz.net/privacy-policy/clientpro/' target='_blank'>${_('Click here to read the Privacy Policy')}.</a> <input type="checkbox" onchange="metaviz.editor.hideCookieBubbleForever(this)"> ${_('Dont show again')}`,
-                    position: 'bottom-center'
-                });
-            }
-
-            // Server
-            if (this.agent.server) {
-
-                // Initial load board json data
-                this.editor.open(boardID);
-
-            }
-
+        // Theme
+        const theme = localStorage.getItem('metaviz.config.theme') || 'Iron';
+        this.container.element.classList.add('theme-' + theme.toLowerCase());
+        for (const [key, value] of Object.entries(global.registry.themes[theme].vars)) {
+            document.documentElement.style.setProperty(key, value);
         }
+
+        // Cookie info
+        i18n.en['site use localstorage'] = 'This site does NOT use cookies. Only essential localStorage data for login.';
+        i18n.pl['site use localstorage'] = 'Ta strona NIE korzysta z plików cookies. Tylko niezbędne dane localStorage do logowania.';
+        i18n.eo['site use localstorage'] = 'Ĉi tiu retejo NE uzas kuketojn. Nur esencaj lokaj Stokaj datumoj por ensaluto.';
+        this.editor.showCookieBubble({
+            text: `${_('site use localstorage')} <input type="checkbox" onchange="metaviz.editor.hideCookieBubbleForever(this)"> ${_('Dont show again')}`,
+            position: 'bottom-center'
+        });
+
+        // Initial load board json data
+        this.editor.open(boardID);
+
     }
 
 }
