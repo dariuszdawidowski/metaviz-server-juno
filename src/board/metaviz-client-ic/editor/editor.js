@@ -2,6 +2,7 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import { setDoc, getDoc, listAssets, deleteManyAssets } from '@junobuild/core';
+import MetavizContextMenuIC from './menu.js';
 
 class MetavizEditorIC extends MetavizEditorBrowser {
 
@@ -15,7 +16,7 @@ class MetavizEditorIC extends MetavizEditorBrowser {
         if ('board' in getParams) this.id = getParams.board;
 
         // Create menu
-        //this.menu = new MetavizContextMenuIC({projectName: this.name});
+        this.menu = new MetavizContextMenuIC({projectName: this.name});
 
         // Focus on canvas
         metaviz.render.container.focus();
