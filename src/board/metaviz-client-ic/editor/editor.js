@@ -100,6 +100,7 @@ class MetavizEditorIC extends MetavizEditorBrowser {
                 version: this.version
             }
         });
+        this.version ++;
 
         // Purge old media files
         await this.purge();
@@ -114,31 +115,41 @@ class MetavizEditorIC extends MetavizEditorBrowser {
      */
 
     async purge() {
-        const hour = 3600 * 1000;
-        const expired = 3 * hour * 24;
-        const now = new Date().getTime();
+
+        // Collect media nodes
+        const nodes = [];
+        metaviz.render.nodes.get('*').forEach(node => {
+            if (['MetavizNodeImage', 'MetavizNodeFile'].includes(node.constructor.name)) nodes.push(node);
+        });
+        console.log('nodes', nodes)
+
+        // Collect media files
         const files = await listAssets({
             collection: 'files',
         });
-        // console.log('files', files)
+        console.log('files', files)
+
+        // Delete expired files
+        const hour = 3600 * 1000;
+        const expired = hour; //3 * hour * 24;
+        const now = new Date().getTime();
         const toDelete = [];
         files.assets.forEach(file => {
-            if (now - Number(file.updated_at / 1000000n) > expired) {
-                toDelete.push(file.fullPath);
-                // toDelete.push(new Promise(resolve => deleteAsset({ collection: 'files', storageFile: file.fullPath }).then(resolve())));
+            // Find reference in nodes
+            const referenced = nodes.some(node => node.params.uri.includes(file.downloadUrl));
+            if (!referenced) {
+                console.log('referenced', referenced);
+                // Expired
+                if (now - Number(file.updated_at / 1000000n) > expired) {
+                    console.log('to delete', file.fullPath);
+                    toDelete.push({
+                        collection: 'files',
+                        fullPath: file.fullPath
+                    });
+                }
             }
         });
-        // await Promise.all(toDelete);
-        // console.log('toDelete', toDelete)
-        await deleteManyAssets({ docs: toDelete });
-        // await deleteAsset({ collection: 'files', storageFile: "/files/Submissions.pdf" })
-        // toDelete.forEach(file => {
-        //     console.log('del:', file)
-        //     deleteAsset({
-        //         collection: 'files',
-        //         storageFile: file
-        //     });
-        // });
+        await deleteManyAssets({ assets: toDelete });
     }
 
     /**
