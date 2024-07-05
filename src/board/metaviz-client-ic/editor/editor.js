@@ -105,6 +105,9 @@ class MetavizEditorIC extends MetavizEditorBrowser {
         // Purge old media files
         await this.purge();
 
+        // Clear
+        this.history.dirty = false;
+
         // Spinner
         this.idle();
 
@@ -121,27 +124,24 @@ class MetavizEditorIC extends MetavizEditorBrowser {
         metaviz.render.nodes.get('*').forEach(node => {
             if (['MetavizNodeImage', 'MetavizNodeFile'].includes(node.constructor.name)) nodes.push(node);
         });
-        console.log('nodes', nodes)
 
         // Collect media files
         const files = await listAssets({
             collection: 'files',
         });
-        console.log('files', files)
 
         // Delete expired files
         const hour = 3600 * 1000;
-        const expired = hour; //3 * hour * 24;
+        const expired = 3 * hour * 24;
         const now = new Date().getTime();
         const toDelete = [];
         files.assets.forEach(file => {
             // Find reference in nodes
             const referenced = nodes.some(node => node.params.uri.includes(file.downloadUrl));
             if (!referenced) {
-                console.log('referenced', referenced);
                 // Expired
                 if (now - Number(file.updated_at / 1000000n) > expired) {
-                    console.log('to delete', file.fullPath);
+                    console.info('Purging unused', file.fullPath);
                     toDelete.push({
                         collection: 'files',
                         fullPath: file.fullPath
