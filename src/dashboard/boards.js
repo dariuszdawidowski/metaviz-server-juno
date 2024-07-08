@@ -26,7 +26,7 @@ const addCategory = async (name, index) => {
             }
         }
     });
-    update();
+    updateDashboard();
     hideSpinner();
 };
 
@@ -43,7 +43,7 @@ const addBoard = async (name, categoryId) => {
             }
         }
     });
-    update();
+    updateDashboard();
     hideSpinner();
 };
 
@@ -138,7 +138,7 @@ const moveCategory = (categoryId, direction) => {
                                     doc: category
                                 }).then(() => {
                                     hideSpinner();
-                                    update();
+                                    updateDashboard();
                                 });
                             }
                         }
@@ -209,7 +209,7 @@ export const renderDashboard = (app) => {
                                 doc: myDoc
                             }).then(() => {
                                 hideSpinner();
-                                update();
+                                updateDashboard();
                             });
                         });
                     });
@@ -244,7 +244,7 @@ export const renderDashboard = (app) => {
                         doc: myDoc
                     }).then(() => {
                         hideSpinner();
-                        update();
+                        updateDashboard();
                     });
                 });
             }
