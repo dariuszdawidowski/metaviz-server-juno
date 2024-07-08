@@ -2,6 +2,7 @@
 
 import { jsonReplacer, jsonReviver } from '@junobuild/utils';
 import { padToTwoDigits, bytes2Human, formatCycles } from '../utils.js';
+import packageJson from '../../package.json' assert { type: 'json' };
 
 /**
  * Calculate size of categories, boards, code and media files
@@ -25,7 +26,7 @@ const calculateSize = (args) => {
         return acc + Number(file.encodings.identity.total_length);
     }, 0);
 
-    const codeSize = 39258685;
+    const codeSize = 52428800;
 
     return {
         categories: categoriesSize,
@@ -80,7 +81,7 @@ export const renderPanelExpenses = (app) => {
                 <div id="storage-expenses"></div>
             </div>
             <div class="tablet">
-                <div style="text-align: center;">Metaviz v0.9.18 @ IC backend v0.6.0</div>
+                <div style="text-align: center;">Metaviz v0.9.18 @ IC backend v${packageJson.version}</div>
                 <div class="powered-by-icp">
                     Powered by<br>
                     <a href="https://internetcomputer.org" target="_blank">
