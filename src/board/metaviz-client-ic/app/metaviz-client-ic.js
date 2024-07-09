@@ -81,7 +81,7 @@ class MetavizClientIC extends Metaviz {
 
         // Cookie info
         i18n.en['site use localstorage'] = 'This site does NOT use cookies. Only essential localStorage data for login.';
-        i18n.pl['site use localstorage'] = 'Ta strona NIE korzysta z plików cookies. Tylko niezbędne dane localStorage do logowania.';
+        i18n.pl['site use localstorage'] = 'Ta strona NIE korzysta z plików cookies. Tylko niezbędne dane w localStorage do logowania.';
         i18n.eo['site use localstorage'] = 'Ĉi tiu retejo NE uzas kuketojn. Nur esencaj lokaj Stokaj datumoj por ensaluto.';
         this.editor.showCookieBubble({
             text: `${_('site use localstorage')} <input type="checkbox" onchange="metaviz.editor.hideCookieBubbleForever(this)"> ${_('Dont show again')}`,
