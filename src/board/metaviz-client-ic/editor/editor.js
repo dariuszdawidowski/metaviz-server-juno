@@ -56,12 +56,18 @@ class MetavizEditorIC extends MetavizEditorBrowser {
                 // Ready
                 this.idle();
 
+                // Empty folder?
+                this.checkEmpty();
+
+                // Centre
+                metaviz.render.focusBounds();
+
                 // Launch start
                 for (const node of metaviz.render.nodes.get('*')) node.start();
 
                 // Update
                 metaviz.render.update();
-
+                
                 // Dispatch final event
                 metaviz.events.call('on:loaded');
 
