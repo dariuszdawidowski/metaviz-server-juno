@@ -19,23 +19,28 @@ npm install
 ```
 
 ### Run in the development mode (open two consoles):
-Quickstart the local development emulator (requires Docker)
+Quickstart the local development emulator in the first console (requires Docker).
 ```bash
 juno dev start
 ```
 
-Starts frontend dev server at `localhost:5173`
+Starts frontend dev server at `localhost:5173` in the second console.
 ```bash
 npm run dev
 ```
 
+### Usage in the development mode:
+Open `localhost:5173` in your browser.
+You will be asked to use an Internet Identity - just create a fake one locally.
+
+
 ### Deploy:
-Build your production site to `./dist/`
+Build your production site to the `./dist/` directory.
 ```bash
 npm run build
 ```
 
-Deploy your project to a Satellite (production)
+Deploy your project to a Juno Satellite (production).
 ```bash
 juno deploy
 ```
@@ -50,7 +55,7 @@ This project is licensed under the MIT license, see LICENSE for details.
 - [Internet Computer](https://internetcomputer.org)
 - [Juno](https://juno.build)
 - [NodeJS](https://nodejs.org)
-- [Docker](https://www.docker.com/).
+- [Docker](https://www.docker.com/)
 - [Metaviz Editor](https://github.com/dariuszdawidowski/metaviz-editor)
 - [Total Diagram](https://github.com/dariuszdawidowski/total-diagram)
 - [Total Popup](https://github.com/dariuszdawidowski/total-popup)
