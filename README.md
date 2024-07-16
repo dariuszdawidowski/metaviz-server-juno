@@ -35,18 +35,18 @@ Build your production site to `./dist/`
 npm run build
 ```
 
-Deploy your project to a Satellite
+Deploy your project to a Satellite (production)
 ```bash
 juno deploy
 ```
 
-## 🚀 Launch
+## 🚀 About Juno and Satelitte
 Explore this [guide](https://juno.build/docs/add-juno-to-an-app/create-a-satellite) to launch your Satellite into orbit via Juno's [administration console](https://console.juno.build).
 
 ## 📃 License
 This project is licensed under the MIT license, see LICENSE for details.
 
-## 📃 References
+## 🔗 References
 - [Internet Computer](https://internetcomputer.org)
 - [Juno](https://juno.build)
 - [NodeJS](https://nodejs.org)
