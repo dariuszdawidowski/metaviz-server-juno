@@ -81,7 +81,7 @@ export const renderPanelExpenses = (app) => {
                 <div id="storage-expenses"></div>
             </div>
             <div class="tablet">
-                <div style="text-align: center;">Metaviz v0.9.21 @ IC backend v${packageJson.version}</div>
+                <div style="text-align: center;">Metaviz v0.9.22 @ IC backend v${packageJson.version}</div>
                 <div class="powered-by-icp">
                     Powered by<br>
                     <a href="https://internetcomputer.org" target="_blank">

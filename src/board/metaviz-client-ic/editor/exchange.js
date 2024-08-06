@@ -66,6 +66,7 @@ class MetavizExchangeIC extends MetavizExchange {
 
         const result = await uploadFile({
             data: file,
+            description: `{"board": "${metaviz.editor.id}"}`,
             collection: 'files',
             token: uuidv4()
         });

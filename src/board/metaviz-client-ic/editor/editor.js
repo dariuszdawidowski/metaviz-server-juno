@@ -137,25 +137,34 @@ class MetavizEditorIC extends MetavizEditorBrowser {
         });
 
         // Delete expired files
-        const hour = 3600 * 1000;
+        const second = 1000;
+        const hour = 3600 * second;
         const expired = 3 * hour * 24;
         const now = new Date().getTime();
         const toDelete = [];
         files.assets.forEach(file => {
+            // Is it the same board?
+            let json = null;
+            try {
+                json = JSON.parse(file.description || '{}');
+            }
+            catch {}
+            
             // Find reference in nodes
-            const referenced = nodes.some(node => node.params.uri.includes(file.downloadUrl));
-            if (!referenced) {
-                // Expired
-                if (now - Number(file.updated_at / 1000000n) > expired) {
-                    console.info('Purging unused', file.fullPath);
-                    toDelete.push({
-                        collection: 'files',
-                        fullPath: file.fullPath
-                    });
+            if (json && ('board' in json) && json.board == metaviz.editor.id) {
+                const referenced = nodes.some(node => node.params.uri.includes(file.downloadUrl));
+                if (!referenced) {
+                    // Expired
+                    if (now - Number(file.updated_at / 1000000n) > expired) {
+                        toDelete.push({
+                            collection: 'files',
+                            fullPath: file.fullPath
+                        });
+                    }
                 }
             }
         });
-        await deleteManyAssets({ assets: toDelete });
+        if (toDelete.length) await deleteManyAssets({ assets: toDelete });
     }
 
     /**
