@@ -1,7 +1,6 @@
 /**
  * Metaviz Node File
- * (c) 2009-2023 Dariusz Dawidowski, All Rights Reserved.
- * (c) 2020-2023 Metaviz Sp. z o.o., All Rights Reserved.
+ * (c) 2009-2024 Dariusz Dawidowski, All Rights Reserved.
  */
 
 class MetavizNodeFile extends MetavizNode {
@@ -84,8 +83,8 @@ class MetavizNodeFile extends MetavizNode {
 
             // Download File
             download: new TotalProMenuOption({
-                icon: this.params.uri ? '<span class="mdi mdi-cloud-download"></span>' : '<span class="mdi mdi-cloud-upload"></span>',
-                text: this.params.uri ? `Download (${this.params.filename == 'External link' ? 'link' : this.params.size.bytes2Human()})` : 'Upload file',
+                icon: () => this.params.uri ? '<span class="mdi mdi-cloud-download"></span>' : '<span class="mdi mdi-cloud-upload"></span>',
+                text: () => this.params.uri ? `Download (${this.params.filename == 'External link' ? 'link' : this.params.size.bytes2Human()})` : 'Upload file',
                 onChange: () => {
                     // Download
                     if (this.params.uri) {
@@ -98,6 +97,8 @@ class MetavizNodeFile extends MetavizNode {
                     else {
                         this.uploadFile();
                     }
+                    // Close menu
+                    metaviz.editor.menu.hide();
                 }
             })
 
