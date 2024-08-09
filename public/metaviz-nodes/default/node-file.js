@@ -9,11 +9,11 @@ class MetavizNodeFile extends MetavizNode {
         super(args);
 
         // Meta defaults
-        if (!('name' in this.params)) this.params['name'] = 'meta' in args && 'name' in args.meta ? args.meta.name : 'File';
-        if (!('filename' in this.params)) this.params['filename'] = 'filename' in args ? args.filename : 'file';
+        if (!('name' in this.params)) this.params['name'] = ('name' in args.params) ? args.params.name : '';
+        if (!('filename' in this.params)) this.params['filename'] = ('filename' in args.params) ? args.params.filename : '';
         if (!('uri' in this.params)) this.params['uri'] = '';
-        if (!('icon' in this.params)) this.params['icon'] = 'icon' in args ? args.icon : 'mdi-file';
-        if (!('mime' in this.params)) this.params['mime'] = '';
+        if (!('icon' in this.params)) this.params['icon'] = ('icon' in args.params) ? args.params.icon : 'mdi-file';
+        if (!('mime' in this.params)) this.params['mime'] = ('mime' in args.params) ? args.params.mime : '';
         if (!('size' in this.params)) this.params['size'] = 0;
 
         // Migrate
@@ -27,12 +27,14 @@ class MetavizNodeFile extends MetavizNode {
 
         // Controls
         this.addControls({
+
             // Icon control
             icon: new MetavizControlIcon('mdi', this.params.icon),
 
             // Input control: Under Icon Name
             name: new MetavizControlInput({
                 name: 'name',
+                placeholder: _('File'),
                 value: this.params.name,
                 onChange: (value) => {
                     metaviz.editor.history.store({
@@ -41,7 +43,7 @@ class MetavizNodeFile extends MetavizNode {
                         params: {name: value},
                         prev: {name: this.params.name}
                     });
-                    this.params.name = value;
+                    this.params.set('name', value);
                 }
             }),
 
@@ -53,6 +55,7 @@ class MetavizNodeFile extends MetavizNode {
 
             // Spinner control
             spinner: new MetavizControlSpinner()
+
         });
         this.controls.filename.edit(false);
         this.controls.size.edit(false);
@@ -61,6 +64,21 @@ class MetavizNodeFile extends MetavizNode {
 
         // Menu Options
         this.addOptions({
+
+            // Name in menu
+            name: new TotalProMenuInput({
+                placeholder: 'Name',
+                value: this.params.name,
+                onChange: (value) => {
+                    metaviz.editor.history.store({
+                        action: 'param',
+                        node: {id: this.id},
+                        params: {name: value},
+                        prev: {name: this.params.name}
+                    });
+                    this.params.set('name', value);
+                }
+            }),
 
             // URI in menu
             uri: new TotalProMenuInput({
@@ -113,6 +131,7 @@ class MetavizNodeFile extends MetavizNode {
             switch (key) {
                 case 'name':
                     this.controls.name.set(value);
+                    this.options.name.set(value);
                     break;
                 case 'filename':
                     this.controls.filename.set(value);
