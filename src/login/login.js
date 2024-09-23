@@ -1,5 +1,5 @@
 import { signIn, InternetIdentityProvider, NFIDProvider } from '@junobuild/core';
-import { addEventClick } from '../utils.js';
+import { addEvent } from '../utils.js';
 import { aboutInternetIdentity } from './about-ii.js';
 import { aboutNFID } from './about-nfid.js';
 
@@ -18,9 +18,10 @@ const hideSpinner = () => {
 export const renderLogin = (app) => {
 
     // Internet Identity login
-    addEventClick({
+    addEvent({
         target: app,
         selector: '#login-ii',
+        type: 'click',
         fn: () => {
             showSpinner();
             signIn({
@@ -32,16 +33,18 @@ export const renderLogin = (app) => {
     });
 
     // Internet Identity info
-    addEventClick({
+    addEvent({
         target: app,
         selector: '#about-ii',
+        type: 'click',
         fn: aboutInternetIdentity
     });
 
     // NFID login
-    addEventClick({
+    addEvent({
         target: app,
         selector: '#login-nfid',
+        type: 'click',
         fn: () => {
             showSpinner();
             signIn({
@@ -53,9 +56,10 @@ export const renderLogin = (app) => {
     });
 
     // NFID info
-    addEventClick({
+    addEvent({
         target: app,
         selector: '#about-nfid',
+        type: 'click',
         fn: aboutNFID
     });
 

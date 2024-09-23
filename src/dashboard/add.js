@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { addEventClick, cleanString } from '../utils.js';
+import { addEvent, cleanString } from '../utils.js';
 
 export const renderAdd = (app, args) => {
 
@@ -59,18 +59,20 @@ export const renderAdd = (app, args) => {
     };
 
     // Add new
-    addEventClick({
+    addEvent({
         target: app,
         selector: `#add-new-${id}`,
+        type: 'click',
         fn: () => {
             if (!freeze) showInputField();
         }
     });
 
     // Confirm
-    addEventClick({
+    addEvent({
         target: app,
         selector: `#add-input-${id} button`,
+        type: 'click',
         fn: () => {
             OK();
         }

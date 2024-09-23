@@ -19,8 +19,9 @@ npm install
 ```
 
 ### Run in the development mode (open two consoles):
-Quickstart the local development emulator in the first console (requires Docker).
+Quickstart the local development emulator in the first console.
 ```bash
+(Start Docker before)
 juno dev start
 ```
 

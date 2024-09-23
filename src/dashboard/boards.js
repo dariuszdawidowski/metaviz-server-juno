@@ -4,7 +4,7 @@ import { renderAdd } from './add.js';
 import { renderPanelExpenses, updatePanelExpenses } from './expenses.js';
 import { renderSidebar } from './sidebar.js';
 import { renderTopbar } from './topbar.js';
-import { padToTwoDigits } from '../utils.js';
+import { addEvent, padToTwoDigits } from '../utils.js';
 
 const showSpinner = () => {
     document.getElementById('metaviz-spinner').style.display = 'block';
@@ -161,7 +161,7 @@ export const renderDashboard = (app) => {
     let selectedBoard = null;
 
     // Context menu for category
-    const menuCategory = new TotalLiteMenu({container: window.document.body});
+    const menuCategory = new TotalLiteMenu({container: document.body});
 
     // Move up
     menuCategory.addItem({
@@ -219,7 +219,7 @@ export const renderDashboard = (app) => {
     });
 
     // Context menu for board
-    const menuBoard = new TotalLiteMenu({container: window.document.body});
+    const menuBoard = new TotalLiteMenu({container: document.body});
     menuBoard.addItem({
         parent: 'root',
         id: 'open-board',
@@ -251,8 +251,34 @@ export const renderDashboard = (app) => {
         }
     });
 
+    // Left click on dots
+    addEvent({
+        target: app,
+        selector: '.dots',
+        type: 'click',
+        fn: (event) => {
+            console.log('bord')
+            // selectedCategory = null;
+            // selectedBoard = null;
+    
+            // for (const element of event.composedPath()) {
+    
+            //     if (element instanceof HTMLElement) {
+    
+            //         // Clicked on category icon
+            //         if (element.classList.contains('dots')) {
+            //             selectedCategory = element.dataset.category;
+            //             menuCategory.show(event.clientX, event.clientY);
+            //             console.log(element, menuCategory, event.clientX, event.clientY)
+            //         }
+    
+            //     }
+            // }
+        }
+    });
+
     // Right click event
-    window.document.body.addEventListener('contextmenu', event => {
+    document.body.addEventListener('contextmenu', event => {
 
         selectedCategory = null;
         selectedBoard = null;
@@ -276,6 +302,7 @@ export const renderDashboard = (app) => {
 
             }
         }
+
     });
 
     const observer = new MutationObserver(async () => {
