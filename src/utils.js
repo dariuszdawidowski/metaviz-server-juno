@@ -10,7 +10,6 @@ export const addEvent = ({target, selector, type, fn}) => {
     const observer = new MutationObserver(() => {
         observer.disconnect();
         document.querySelectorAll(selector).forEach(element => {
-            console.log('icz', selector)
             element.addEventListener(type, fn, {passive: true});
         });
     });

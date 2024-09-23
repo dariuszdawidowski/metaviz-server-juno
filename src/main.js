@@ -41,4 +41,16 @@ const onAppInit = async () => {
     });
 };
 
+/**
+ * Block defaulot context menu
+ */
+
+document.body.addEventListener('contextmenu', event => {
+    event.preventDefault();
+});
+
+/**
+ * Start
+ */
+
 document.addEventListener('DOMContentLoaded', onAppInit, {once: true});

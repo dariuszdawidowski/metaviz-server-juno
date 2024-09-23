@@ -251,60 +251,6 @@ export const renderDashboard = (app) => {
         }
     });
 
-    // Left click on dots
-    addEvent({
-        target: app,
-        selector: '.dots',
-        type: 'click',
-        fn: (event) => {
-            console.log('bord')
-            // selectedCategory = null;
-            // selectedBoard = null;
-    
-            // for (const element of event.composedPath()) {
-    
-            //     if (element instanceof HTMLElement) {
-    
-            //         // Clicked on category icon
-            //         if (element.classList.contains('dots')) {
-            //             selectedCategory = element.dataset.category;
-            //             menuCategory.show(event.clientX, event.clientY);
-            //             console.log(element, menuCategory, event.clientX, event.clientY)
-            //         }
-    
-            //     }
-            // }
-        }
-    });
-
-    // Right click event
-    document.body.addEventListener('contextmenu', event => {
-
-        selectedCategory = null;
-        selectedBoard = null;
-        event.preventDefault();
-
-        for (const element of event.composedPath()) {
-
-            if (element instanceof HTMLElement) {
-
-                // Clicked on category icon
-                if (element.classList.contains('dots')) {
-                    selectedCategory = element.dataset.category;
-                    menuCategory.show(event.clientX, event.clientY);
-                }
-
-                // Clicked on board icon
-                if (element.classList.contains('board-link-a')) {
-                    selectedBoard = element.dataset.board;
-                    menuBoard.show(event.clientX, event.clientY);
-                }
-
-            }
-        }
-
-    });
-
     const observer = new MutationObserver(async () => {
         observer.disconnect();
         await updateDashboard();
@@ -318,6 +264,43 @@ export const renderDashboard = (app) => {
             <div id="boards" class="boards"></div>
         </div>
     `;
+
+    // Left click on a category dots
+    addEvent({
+        target: app,
+        selector: '.dots',
+        type: 'click',
+        fn: (event) => {
+            console.log('board', event.target)
+            selectedCategory = event.target.dataset.category;
+            selectedBoard = null;
+            menuCategory.show(event.clientX, event.clientY);
+        }
+    });
+
+    // Right click on a category dots
+    addEvent({
+        target: app,
+        selector: '.dots',
+        type: 'contextmenu',
+        fn: (event) => {
+            selectedCategory = event.target.dataset.category;
+            selectedBoard = null;
+            menuCategory.show(event.clientX, event.clientY);
+        }
+    });
+
+    // Right click on a board arrow
+    addEvent({
+        target: app,
+        selector: '.board-link-a',
+        type: 'contextmenu',
+        fn: (event) => {
+            selectedCategory = null;
+            selectedBoard = event.target.dataset.board;
+            menuBoard.show(event.clientX, event.clientY);
+}
+    });
 
 };
 
