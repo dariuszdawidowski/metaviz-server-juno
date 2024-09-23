@@ -1,6 +1,7 @@
 import { authSubscribe, initSatellite } from '@junobuild/core';
 import { renderBoard } from './board/render.js';
-import { renderDashboard } from './dashboard/boards.js';
+import { renderBoards } from './boards/boards.js';
+import { renderUsers } from './users/users.js';
 import { renderLogin } from './login/login.js';
 import '../style.css';
 
@@ -18,14 +19,40 @@ authSubscribe((user) => {
 
     // Read URL params
     const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
 
-    if (params.has('board')) {
+    // Read page
+    router(url);
+});
+
+/**
+ * Routing
+ */
+
+const router = (url) => {
+
+    // Page
+    if (url.searchParams.has('page')) {
+        const page = url.searchParams.get('page');
+        if (page == 'boards')
+            renderBoards(app);
+        else if (page == 'users')
+            renderUsers(app);
+    }
+
+    // Board
+    else if (url.searchParams.has('board')) {
         renderBoard(app);
     }
+
+    // Fallback
     else {
-        renderDashboard(app);
+        renderBoards(app);        
     }
+
+};
+
+window.addEventListener('popstate', (event) => {
+    console.log('URL or state has changed:', window.location.href);
 });
 
 /**

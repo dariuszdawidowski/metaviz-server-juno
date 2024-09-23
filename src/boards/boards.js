@@ -4,15 +4,7 @@ import { renderAdd } from './add.js';
 import { renderPanelExpenses, updatePanelExpenses } from './expenses.js';
 import { renderSidebar } from './sidebar.js';
 import { renderTopbar } from './topbar.js';
-import { addEvent, padToTwoDigits } from '../utils.js';
-
-const showSpinner = () => {
-    document.getElementById('metaviz-spinner').style.display = 'block';
-};
-
-const hideSpinner = () => {
-    document.getElementById('metaviz-spinner').style.display = 'none';
-};
+import { addEvent, padToTwoDigits, showSpinner, hideSpinner } from '../utils.js';
 
 const addCategory = async (name, index) => {
     showSpinner();
@@ -26,7 +18,7 @@ const addCategory = async (name, index) => {
             }
         }
     });
-    updateDashboard();
+    updateBoards();
     hideSpinner();
 };
 
@@ -43,7 +35,7 @@ const addBoard = async (name, categoryId) => {
             }
         }
     });
-    updateDashboard();
+    updateBoards();
     hideSpinner();
 };
 
@@ -138,7 +130,7 @@ const moveCategory = (categoryId, direction) => {
                                     doc: category
                                 }).then(() => {
                                     hideSpinner();
-                                    updateDashboard();
+                                    updateBoards();
                                 });
                             }
                         }
@@ -152,7 +144,7 @@ const moveCategory = (categoryId, direction) => {
     });
 };
 
-export const renderDashboard = (app) => {
+export const renderBoards = (app) => {
 
     // Selected category id by menu
     let selectedCategory = null;
@@ -209,7 +201,7 @@ export const renderDashboard = (app) => {
                                 doc: myDoc
                             }).then(() => {
                                 hideSpinner();
-                                updateDashboard();
+                                updateBoards();
                             });
                         });
                     });
@@ -244,7 +236,7 @@ export const renderDashboard = (app) => {
                         doc: myDoc
                     }).then(() => {
                         hideSpinner();
-                        updateDashboard();
+                        updateBoards();
                     });
                 });
             }
@@ -253,7 +245,7 @@ export const renderDashboard = (app) => {
 
     const observer = new MutationObserver(async () => {
         observer.disconnect();
-        await updateDashboard();
+        await updateBoards();
     });
     observer.observe(app, {childList: true, subtree: true});
 
@@ -298,12 +290,12 @@ export const renderDashboard = (app) => {
             selectedCategory = null;
             selectedBoard = event.target.dataset.board;
             menuBoard.show(event.clientX, event.clientY);
-}
+        }
     });
 
 };
 
-const updateDashboard = async () => {
+const updateBoards = async () => {
 
     // Query data
     const categories = await listDocs({
@@ -357,4 +349,4 @@ const updateDashboard = async () => {
 
 };
 
-window.addEventListener('reload', updateDashboard);
+window.addEventListener('reload', updateBoards);
