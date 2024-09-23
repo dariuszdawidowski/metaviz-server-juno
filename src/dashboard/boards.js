@@ -266,17 +266,16 @@ export const renderDashboard = (app) => {
     `;
 
     // Left click on a category dots
-    addEvent({
+    /*addEvent({
         target: app,
         selector: '.dots',
         type: 'click',
         fn: (event) => {
-            console.log('board', event.target)
             selectedCategory = event.target.dataset.category;
             selectedBoard = null;
             menuCategory.show(event.clientX, event.clientY);
         }
-    });
+    });*/
 
     // Right click on a category dots
     addEvent({
