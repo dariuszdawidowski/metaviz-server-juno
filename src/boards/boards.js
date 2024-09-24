@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from 'uuid';
 import { listDocs, setDoc, getDoc, deleteDoc, deleteManyDocs, listAssets } from '@junobuild/core';
 import { renderAdd } from './add.js';
-import { renderPanelExpenses, updatePanelExpenses } from './expenses.js';
-import { renderSidebar } from './sidebar.js';
-import { renderTopbar } from './topbar.js';
+import { renderPanelExpenses, updatePanelExpenses } from '../panels/expenses.js';
+import { renderSidebar } from '../panels/sidebar.js';
+import { renderTopbar } from '../panels/topbar.js';
 import { addEvent, padToTwoDigits, showSpinner, hideSpinner } from '../utils.js';
 
 const addCategory = async (name, index) => {
