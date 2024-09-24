@@ -17,6 +17,21 @@ export const addEvent = ({target, selector, type, fn}) => {
 };
 
 /**
+ * URL params
+ */
+
+export const setUrlParam = (param, value) => {
+    const url = new URL(window.location);
+    url.searchParams.set(param, value);
+    window.history.replaceState({}, '', url);
+};
+
+export const getUrlParam = (param) => {
+    const url = new URL(window.location);
+    return url.searchParams.get(param);
+};
+
+/**
  * Reload
  */
 

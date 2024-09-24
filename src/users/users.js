@@ -1,3 +1,4 @@
+import { listDocs, listAssets } from '@junobuild/core';
 import { renderPanelExpenses, updatePanelExpenses } from '../panels/expenses.js';
 import { renderSidebar } from '../panels/sidebar.js';
 import { renderTopbar } from '../panels/topbar.js';
@@ -35,6 +36,10 @@ const updateUsers = async () => {
 
     // Info Panel Consumption and Expenses
     updatePanelExpenses({categories, boards, files});
+
+    document.querySelector('#users').innerHTML = `
+        ${renderTopbar({ categories: categories.items.length, boards: boards.items.length})}
+    `;
 
 };
 

@@ -30,7 +30,7 @@ authSubscribe((user) => {
  * Routing
  */
 
-const router = (app, url) => {
+export const router = (app, url) => {
 
     // Page
     if (url.searchParams.has('page')) {
@@ -61,10 +61,6 @@ const router = (app, url) => {
     }
 
 };
-
-window.addEventListener('popstate', (event) => {
-    console.log('URL or state has changed:', window.location.href);
-});
 
 /**
  * When the app starts, we initialize Juno.

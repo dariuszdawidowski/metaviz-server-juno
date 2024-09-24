@@ -95,7 +95,7 @@ body {
     border: 1px solid #ccc;
     box-sizing: border-box;
     font-size: 14px;
-    font-wieght: 400;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: 0.2s linear;
@@ -143,6 +143,10 @@ body {
 .sidebar .icon:hover {
     color: #fff;
     cursor: pointer;
+}
+
+.sidebar .icon.selected {
+    color: var(--metaviz-color-cyan);
 }
 
 /* Infobar */
