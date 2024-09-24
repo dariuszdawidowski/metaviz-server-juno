@@ -15,7 +15,7 @@ export const renderUsers = (app) => {
         <div style="width: 100%; height: 100%; display: flex; flex-direction: row;">
             ${renderSidebar(app)}
             ${renderPanelExpenses(app)}
-            <div id="users" class="users">USERS</div>
+            <div id="users" class="right"></div>
         </div>
     `;
 
@@ -38,7 +38,7 @@ const updateUsers = async () => {
     updatePanelExpenses({categories, boards, files});
 
     document.querySelector('#users').innerHTML = `
-        ${renderTopbar({ categories: categories.items.length, boards: boards.items.length})}
+        ${renderTopbar(`Administration of 2 organizations with 10 groups and 20 users`)}
     `;
 
 };

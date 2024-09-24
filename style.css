@@ -135,18 +135,18 @@ body {
 }
 
 .sidebar .icon {
-    color: #ddd;
+    color: var(--metaviz-color-cyan);
     font-size: 28px;
     margin: 8px;
 }
 
 .sidebar .icon:hover {
-    color: #fff;
+    color: #ddd;
     cursor: pointer;
 }
 
 .sidebar .icon.selected {
-    color: var(--metaviz-color-cyan);
+    color: #fff;
 }
 
 /* Infobar */
@@ -208,7 +208,7 @@ body {
 
 /* Boards */
 
-.boards {
+.right {
     width: 70%;
     height: calc(100% - 30px);
     margin: 15px;
@@ -217,7 +217,7 @@ body {
     padding-right: 15px;
 }
 
-.boards .group {
+.right .group {
     position: relative;
     border-radius: 8px;
     background-color: white;
@@ -225,14 +225,14 @@ body {
     margin-bottom: 15px;
 }
 
-.boards .group h1 {
+.right .group h1 {
     font-size: 20px;
     margin-top: 0;
     border-bottom: 5px solid black;
     width: 32%;
 }
 
-.boards .group .dots {
+.right .group .dots {
     position: absolute;
     right: 20px;
     top: 10px;
@@ -240,16 +240,16 @@ body {
     font-size: 16px;
 }
 
-.boards .group .dots:hover {
+.right .group .dots:hover {
     cursor: pointer;
     color: var(--metaviz-color-cyan);
 }
 
-.boards .click {
+.right .click {
     margin: 8px 0 9px 4px;
 }
 
-.boards .section {
+.right .section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

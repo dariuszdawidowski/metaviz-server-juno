@@ -253,7 +253,7 @@ export const renderBoards = (app) => {
         <div style="width: 100%; height: 100%; display: flex; flex-direction: row;">
             ${renderSidebar(app)}
             ${renderPanelExpenses(app)}
-            <div id="boards" class="boards"></div>
+            <div id="boards" class="right"></div>
         </div>
     `;
 
@@ -318,7 +318,7 @@ const updateBoards = async () => {
     // Render boards column
     if (categories.items.length > 0) {
         document.querySelector('#boards').innerHTML = `
-            ${renderTopbar({ categories: categories.items.length, boards: boards.items.length})}
+            ${renderTopbar(`Your resources on ${boards.items.length} boards in ${categories.items.length} categories`)}
             ${renderRecent(recentBoards)}
             ${categories.items.toSorted((a, b) => a.data.index - b.data.index).map(item => {
                 return renderCategory(app, { id: item.key, name: item.data.name }, boards.items);
