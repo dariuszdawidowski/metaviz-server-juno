@@ -19,7 +19,7 @@
     "vite": "^5.2.13"
   },
   "dependencies": {
-    "@junobuild/core": "^0.0.51",
+    "@junobuild/core": "^0.0.61",
     "uuid": "^9.0.1"
   }
 }

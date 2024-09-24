@@ -10,33 +10,44 @@ import '../style.css';
  */
 
 authSubscribe((user) => {
+
+    // Main container
     const app = document.querySelector('#app');
 
+    // Login
     if (user === null || user === undefined) {
         renderLogin(app);
-        return;
     }
 
-    // Read URL params
-    const url = new URL(window.location.href);
+    // Show page
+    else {
+        router(app, new URL(window.location.href));
+    }
 
-    // Read page
-    router(url);
 });
 
 /**
  * Routing
  */
 
-const router = (url) => {
+const router = (app, url) => {
 
     // Page
     if (url.searchParams.has('page')) {
+
+        // Read /?page=<name>
         const page = url.searchParams.get('page');
-        if (page == 'boards')
+
+        // Page: boards
+        if (page == 'boards') {
             renderBoards(app);
-        else if (page == 'users')
+        }
+
+        // Page: users
+        else if (page == 'users') {
             renderUsers(app);
+        }
+
     }
 
     // Board
