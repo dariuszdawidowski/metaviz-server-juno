@@ -43,7 +43,145 @@
             </svg>
         </div>
 
-        <!-- Metaviz Library -->
+        <!-- METAVIZ LOCAL LIBRARY -->
+
+        <!-- Total Lite Menu -->
+        <script src="/public/lib/total-lite-menu/litemenu.js"></script>
+        <link rel="stylesheet" href="/public/lib/total-lite-menu/litemenu.css">
+
+        <!-- Total Pro Menu -->
+        <link rel="stylesheet" type="text/css" href="/public/lib/total-pro-menu/src/menu.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/total-pro-menu/widgets/group.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/total-pro-menu/widgets/input.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/total-pro-menu/widgets/option.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/total-pro-menu/widgets/select.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/total-pro-menu/widgets/separator.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/total-pro-menu/widgets/submenu.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/total-pro-menu/widgets/switch.css">
+        <script type="text/javascript" src="/public/lib/total-pro-menu/src/widget.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/src/menu.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/widgets/group.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/widgets/input.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/widgets/option.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/widgets/panel.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/widgets/select.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/widgets/separator.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/widgets/submenu.js"></script>
+        <script type="text/javascript" src="/public/lib/total-pro-menu/widgets/switch.js"></script>
+
+        <!-- Metaviz Editor -->
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/style/metaviz.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/style/popup.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/links/bezier.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/links/symlink.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/nodes/node-dummy.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/nodes/node-point.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/nodes/node-label.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/nodes/node-text.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/nodes/node-clipart.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/nodes/node-image.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/nodes/node-url.css">
+        <link rel="stylesheet" type="text/css" href="/public/lib/metaviz-editor/nodes/node-uber-duck.css">
+
+        <script type="text/javascript" src="/public/lib/metaviz-editor/utils/logging.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/app/config.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/app/metaviz-editor.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/state.js"></script>
+        <script type="text/javascript">
+            let metaviz = null;
+        </script>
+
+        <!-- Translations -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/app/i18n.js"></script>
+
+        <!-- Utils -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/utils/jsext.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/utils/events.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/utils/validators.js"></script>
+
+        <!-- Networking -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/net/ajax-in.js"></script>
+
+        <!-- GUI -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/base.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/badge.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/bitmap.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/button.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/icon.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/input.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/label.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/spinner.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/link.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/select.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/slider.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/richtext.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/popovers/boolean.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/popovers/color-picker.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/popovers/clipart-select.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/popovers/input-field.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/controls/popovers/text-select.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/arrange/geometry.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/arrange/sort.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/arrange/align.js"></script>
+
+        <!-- Render -->
+        <script type="text/javascript" src="/public/lib/total-diagram/gremlin.js"></script>
+        <script type="text/javascript" src="/public/lib/total-diagram/render-node.js"></script>
+        <script type="text/javascript" src="/public/lib/total-diagram/render-link.js"></script>
+        <script type="text/javascript" src="/public/lib/total-diagram/manager-nodes.js"></script>
+        <script type="text/javascript" src="/public/lib/total-diagram/manager-links.js"></script>
+        <script type="text/javascript" src="/public/lib/total-diagram/render.js"></script>
+
+        <!-- Themes -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/themes/iron.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/themes/covellite.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/themes/studio.js"></script>
+
+        <!-- Editor -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/render.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/pipeline.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/exchange.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/history.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/render-link.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/manager-links.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/socket.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/render-node.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/manager-nodes.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/navigator.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/cage.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/keyboard.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/pointer.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/selection.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/clipboard.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/editor/editor.js"></script>
+
+        <!-- Links -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/links/bezier.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/links/symlink.js"></script>
+
+        <!-- Data -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/format/format.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/format/stack/data-in.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/format/stack/data-out.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/format/json/data-in.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/format/json/data-out.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/format/svg/data-out.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/storage/filesystem/data-in-out.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/storage/indexeddb/data-in-out.js"></script>
+
+        <!-- Nodes: Standard -->
+        <script type="text/javascript" src="/public/lib/metaviz-editor/nodes/node-dummy.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/nodes/node-point.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/nodes/node-label.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/nodes/node-text.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/nodes/node-clipart.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/nodes/node-image.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/nodes/node-url.js"></script>
+        <script type="text/javascript" src="/public/lib/metaviz-editor/nodes/node-uber-duck.js"></script>
+        <!------ END METAVIZ LOCAL LIBRARY ------>
+
+        <!-- METAVIZ PRODUCTION LIBRARY -->
+        <!--
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/total-lite-menu@latest/dist/total-lite-menu.css">
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/total-pro-menu@latest/dist/total-pro-menu.css">
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/metaviz-editor@latest/dist/metaviz-editor.css">
@@ -53,6 +191,8 @@
         <script type="text/javascript" src="https://unpkg.com/total-popup@latest/dist/total-popup.js"></script>
         <script type="text/javascript" src="https://unpkg.com/total-diagram@latest/dist/total-diagram.js"></script>
         <script type="text/javascript" src="https://unpkg.com/metaviz-editor@latest/dist/metaviz-editor.js"></script>
+        -->
+        <!-- END METAVIZ PRODUCTION LIBRARY -->
 
         <!-- Metaviz Nodes -->
         <link rel="stylesheet" type="text/css" href="/metaviz-nodes/default/node-file.css">
