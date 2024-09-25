@@ -1,7 +1,7 @@
 import { authSubscribe, initSatellite } from '@junobuild/core';
 import { renderBoard } from './board/render.js';
 import { Boards } from './boards/boards.js';
-import { renderUsers } from './users/users.js';
+import { Users } from './users/users.js';
 import { renderLogin } from './login/login.js';
 import '../style.css';
 
@@ -31,6 +31,7 @@ authSubscribe((user) => {
  */
 
 const boards = new Boards(app);
+const users = new Users(app);
 
 /**
  * Routing
@@ -47,12 +48,11 @@ export const router = (app, url) => {
         // Page: boards
         if (page == 'boards') {
             boards.render();
-            //renderBoards(app);
         }
 
         // Page: users
         else if (page == 'users') {
-            renderUsers(app);
+            users.render();
         }
 
     }
