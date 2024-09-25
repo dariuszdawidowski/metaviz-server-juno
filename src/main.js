@@ -1,6 +1,6 @@
 import { authSubscribe, initSatellite } from '@junobuild/core';
 import { renderBoard } from './board/render.js';
-import { renderBoards } from './boards/boards.js';
+import { Boards } from './boards/boards.js';
 import { renderUsers } from './users/users.js';
 import { renderLogin } from './login/login.js';
 import '../style.css';
@@ -27,6 +27,12 @@ authSubscribe((user) => {
 });
 
 /**
+ * Create components
+ */
+
+const boards = new Boards(app);
+
+/**
  * Routing
  */
 
@@ -40,7 +46,8 @@ export const router = (app, url) => {
 
         // Page: boards
         if (page == 'boards') {
-            renderBoards(app);
+            boards.render();
+            //renderBoards(app);
         }
 
         // Page: users
@@ -57,10 +64,18 @@ export const router = (app, url) => {
 
     // Fallback
     else {
-        renderBoards(app);        
+        boards.render();
     }
 
 };
+
+/**
+ * Block default context menu
+ */
+
+document.body.addEventListener('contextmenu', event => {
+    event.preventDefault();
+});
 
 /**
  * When the app starts, we initialize Juno.
@@ -74,14 +89,6 @@ const onAppInit = async () => {
         }
     });
 };
-
-/**
- * Block defaulot context menu
- */
-
-document.body.addEventListener('contextmenu', event => {
-    event.preventDefault();
-});
 
 /**
  * Start
