@@ -74,7 +74,7 @@ export class Groups extends Component {
 
     render() {
 
-        // Selected board id by menu
+        // Selected group id by menu
         let selectedGroup = null;
 
         // Context menu for group

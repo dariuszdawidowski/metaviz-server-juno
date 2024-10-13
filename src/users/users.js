@@ -5,7 +5,7 @@ import { renderSidebar } from '../panels/sidebar.js';
 import { renderTopbar } from '../panels/topbar.js';
 import { Component } from '../boost.js';
 import { renderAdd } from '../widgets/add.js';
-import { addEvent } from '../utils.js';
+import { addEvent, getDataset } from '../utils.js';
 import { showSpinner, hideSpinner } from '../widgets/spinner.js';
 
 export class Users extends Component {
@@ -56,6 +56,42 @@ export class Users extends Component {
 
     render() {
 
+        // Selected user id by menu
+        let selectedUser = null;
+
+        // Context menu for group
+        const menuUser = new TotalLiteMenu({container: document.body});
+        menuUser.addItem({
+            parent: 'root',
+            id: 'edit-user',
+            name: '✏️ Edit user',
+            onClick: () => {
+            }
+        });
+        menuUser.addItem({
+            parent: 'root',
+            id: 'del-user',
+            name: '❌ Delete user',
+            onClick: () => {
+                if (confirm('Are you sure to delete this user?')) {
+                    showSpinner();
+                    getDoc({
+                        collection: 'users',
+                        key: selectedUser
+                    }).then(myDoc => {
+                        deleteDoc({
+                            collection: 'users',
+                            doc: myDoc
+                        }).then(() => {
+                            selectedUser = null;
+                            hideSpinner();
+                            this.update();
+                        });
+                    });
+                }
+            }
+        });
+
         super.render(`
             <div style="width: 100%; height: 100%; display: flex; flex-direction: row;">
                 ${renderSidebar(app)}
@@ -64,6 +100,17 @@ export class Users extends Component {
             </div>
         `);
     
+        // Right click on an icon
+        addEvent({
+            target: app,
+            selector: '.user-icon',
+            type: 'contextmenu',
+            fn: (event) => {
+                selectedUser = getDataset(event.target, 'user');
+                menuUser.show(event.clientX, event.clientY);
+            }
+        });
+
     }
 
     async update() {

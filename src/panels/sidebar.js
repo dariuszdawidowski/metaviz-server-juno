@@ -45,7 +45,7 @@ export const renderSidebar = (app) => {
             <a href="https://www.metaviz.net" target="_blank"><img src="//cdn1.metaviz.net/metaviz-mark-color-rgba.png" width="50" height="50"></a>
             <div id="icon-page-boards" class="icon"><span class="mdi mdi-bulletin-board"></span></div>
             <div id="icon-page-users" class="icon"><span class="mdi mdi-account-multiple"></span></div>
-            <div id="icon-page-groups" class="icon"><span class="mdi mdi-home-group"></span></div>
+            <div id="icon-page-groups" class="icon"><span class="mdi mdi-group"></span></div>
             ${renderLogout(app)}
         </div>
     `;
