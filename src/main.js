@@ -2,6 +2,7 @@ import { authSubscribe, initSatellite } from '@junobuild/core';
 import { renderBoard } from './board/render.js';
 import { Boards } from './boards/boards.js';
 import { Users } from './users/users.js';
+import { Groups } from './groups/groups.js';
 import { renderLogin } from './login/login.js';
 import '../style.css';
 
@@ -32,6 +33,7 @@ authSubscribe((user) => {
 
 const boards = new Boards(app);
 const users = new Users(app);
+const groups = new Groups(app);
 
 /**
  * Routing
@@ -55,6 +57,10 @@ export const router = (app, url) => {
             users.render();
         }
 
+        // Page: groups
+        else if (page == 'groups') {
+            groups.render();
+        }
     }
 
     // Board

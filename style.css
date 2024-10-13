@@ -228,8 +228,7 @@ body {
 .right .group h1 {
     font-size: 20px;
     margin-top: 0;
-    border-bottom: 5px solid black;
-    width: 32%;
+    border-bottom: 4px solid black;
 }
 
 .right .group .dots {
@@ -358,6 +357,28 @@ a .board-link, a:visited .board-link {
 .board-add button:hover {
     cursor: pointer;
     background-color: var(--metaviz-color-cyan);
+}
+
+/* Group icon */
+
+.group-icon, .user-icon {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+.group-icon span, .user-icon span {
+    font-size: 50px;
+}
+
+.group-icon .group-name, .user-icon .user-name {
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+}
+
+.group-icon:hover, .user-icon:hover {
+    color: var(--metaviz-color-cyan);
 }
 
 /* Wizard */

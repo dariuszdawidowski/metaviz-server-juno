@@ -3,8 +3,14 @@ import { addEvent, cleanString } from '../utils.js';
 
 export const renderAdd = (app, args) => {
 
+    // Generate iid
     const id = uuidv4();
+
+    // Freezed
     let freeze = false;
+
+    // Sublevel
+    const sub = ('sub' in args) ? args.sub : true;
 
     // Show input field
     const showInputField = () => {
@@ -79,7 +85,7 @@ export const renderAdd = (app, args) => {
     });
 
     return `
-        <div id="add-new-${id}" class="board-add">
+        <div id="add-new-${id}" class="board-add" style="${sub ? '' : 'margin: 0;'}">
             <span class="plus">+</span><span class="add">${args.text}</span>
         </div>
         <div id="add-input-${id}" class="board-add" style="display: none;">

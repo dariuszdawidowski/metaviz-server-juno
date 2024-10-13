@@ -33,6 +33,45 @@ export default defineDevConfig(() => ({
                     mutablePermissions: false
                 },
 
+                /**
+                 * Users
+                 * name: string
+                 * hash: hashed password
+                 * groups: [uuid, ...]
+                 */
+                {
+                    collection: 'users',
+                    read: 'private',
+                    write: 'private',
+                    memory: 'stable',
+                    mutablePermissions: false
+                },
+
+                /**
+                 * Groups
+                 * name: string
+                 * organizations: [uuid, ...]
+                 */
+                {
+                    collection: 'groups',
+                    read: 'private',
+                    write: 'private',
+                    memory: 'stable',
+                    mutablePermissions: false
+                },
+
+                /**
+                 * Organizations
+                 * name: string
+                 * index: int
+                 */
+                {
+                    collection: 'organizations',
+                    read: 'private',
+                    write: 'private',
+                    memory: 'stable',
+                    mutablePermissions: false
+                },
             ],
             storage: [
                 {

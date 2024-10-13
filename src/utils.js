@@ -95,13 +95,17 @@ export const formatCycles = (num) => {
 };
 
 /**
- * Busy spinner
+ * Get dataset from element, if not fount then search up to DOM tree
+ * @param element: DOM Element
+ * @param datasetKey: string - key name
  */
 
-export const showSpinner = () => {
-    document.getElementById('metaviz-spinner').style.display = 'block';
-};
-
-export const hideSpinner = () => {
-    document.getElementById('metaviz-spinner').style.display = 'none';
-};
+export function getDataset(element, datasetKey) {
+    while (element) {
+        if (element.dataset && element.dataset[datasetKey]) {
+            return element.dataset[datasetKey];
+        }
+        element = element.parentElement; // Przechodzenie w górę drzewa DOM
+    }
+    return null; // Jeśli nie znaleziono
+}

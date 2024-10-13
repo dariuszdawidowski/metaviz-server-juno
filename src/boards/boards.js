@@ -1,10 +1,11 @@
 import { v4 as uuidv4 } from 'uuid';
 import { listDocs, setDoc, getDoc, deleteDoc, deleteManyDocs, listAssets } from '@junobuild/core';
-import { renderAdd } from './add.js';
+import { renderAdd } from '../widgets/add.js';
 import { renderPanelExpenses, updatePanelExpenses } from '../panels/expenses.js';
 import { renderSidebar } from '../panels/sidebar.js';
 import { renderTopbar } from '../panels/topbar.js';
-import { addEvent, padToTwoDigits, showSpinner, hideSpinner } from '../utils.js';
+import { addEvent, padToTwoDigits, getDataset } from '../utils.js';
+import { showSpinner, hideSpinner } from '../widgets/spinner.js';
 import { Component } from '../boost.js';
 
 export class Boards extends Component {
@@ -242,6 +243,7 @@ export class Boards extends Component {
                             collection: 'boards',
                             doc: myDoc
                         }).then(() => {
+                            selectedBoard = null;
                             hideSpinner();
                             this.update();
                         });
@@ -264,7 +266,7 @@ export class Boards extends Component {
         //     selector: '.dots',
         //     type: 'click',
         //     fn: (event) => {
-        //         selectedCategory = event.target.dataset.category;
+        //         selectedCategory = getDataset(event.target, 'category');
         //         selectedBoard = null;
         //         menuCategory.show(event.clientX, event.clientY);
         //     }
@@ -276,7 +278,7 @@ export class Boards extends Component {
             selector: '.dots',
             type: 'contextmenu',
             fn: (event) => {
-                selectedCategory = event.target.dataset.category;
+                selectedCategory = getDataset(event.target, 'category');
                 selectedBoard = null;
                 menuCategory.show(event.clientX, event.clientY);
             }
@@ -289,7 +291,7 @@ export class Boards extends Component {
             type: 'contextmenu',
             fn: (event) => {
                 selectedCategory = null;
-                selectedBoard = event.target.dataset.board;
+                selectedBoard = getDataset(event.target, 'board');
                 menuBoard.show(event.clientX, event.clientY);
             }
         });
@@ -329,7 +331,7 @@ export class Boards extends Component {
                     return this.renderCategory(app, { id: item.key, name: item.data.name }, boards.items);
                 }).join('')}
                 <div class="group">
-                    ${renderAdd(app, {text: 'ADD NEW CATEGORY', placeholder: 'Category name', callback: async (value) => {
+                    ${renderAdd(app, {text: 'ADD NEW CATEGORY', placeholder: 'Category name', sub: false, callback: async (value) => {
                         await this.addCategory(value, categories.items.length);
                     }})}
                 </div>
