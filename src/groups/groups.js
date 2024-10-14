@@ -53,22 +53,50 @@ export class Groups extends Component {
 
     }
 
-    renderOrganization(app, args) {
+    renderGroup(app, args) {
     
         return `
             <div class="group">
                 <h1>⇢ ${args.name}</h1>
                 <div class="section">
-                    ${args.groups.map((item, index) => {
-                        if (args.id == item.data.organization)
-                            return this.renderGroupIcon({ id: item.key, name: item.data.name });
-                    }).join('')}
                 </div>
-                ${renderAdd(app, {text: 'ADD NEW GROUP', placeholder: 'Group name', callback: async (value) => {
-                    await this.addGroup(value, args.id);
+                ${renderAdd(app, {text: 'ASSIGN USER', placeholder: 'User name', sub: false, callback: async (value) => {
+                }})}
+                ${renderAdd(app, {text: 'ASSIGN BOARD', placeholder: 'Board name', sub: false, callback: async (value) => {
                 }})}
             </div>
         `;
+    
+    }
+
+    renderOrganization(app, args) {
+
+        // List groups
+        if (args.groups.length) {
+            return `
+                <h1>⇢ ${args.name}</h1>
+                ${args.groups.map((item, index) => {
+                    return this.renderGroup(app, { id: item.key, name: item.data.name, organization: args.id });
+                }).join('')}
+                <div class="group">
+                    ${renderAdd(app, {text: 'ADD NEW GROUP', placeholder: 'Group name', sub: false, callback: async (value) => {
+                        await this.addGroup(value, args.id);
+                    }})}
+                </div>
+            `;
+        }
+
+        // No groups yet
+        else {
+            return `
+                <h1>⇢ ${args.name}</h1>
+                <div class="group">
+                    ${renderAdd(app, {text: 'ADD NEW GROUP', placeholder: 'Group name', sub: false, callback: async (value) => {
+                        await this.addGroup(value, args.id);
+                    }})}
+                </div>
+            `;
+        }
     
     }
 
@@ -155,7 +183,11 @@ export class Groups extends Component {
             document.querySelector('#groups').innerHTML = `
                 ${renderTopbar(`Administration of ${groups.items.length} groups in ${organizations.items.length} organization${organizations.items.length > 1 ? 's' : ''}`)}
                 ${organizations.items.toSorted((a, b) => a.data.index - b.data.index).map(item => {
-                    return this.renderOrganization(app, { id: item.key, name: item.data.name, groups: groups.items });
+                    return this.renderOrganization(app, {
+                        id: item.key,
+                        name: item.data.name,
+                        groups: groups.items.filter(group => group.data.organization == item.key)
+                    });
                 }).join('')}
                 <div class="group">
                     ${renderAdd(app, {text: 'ADD NEW ORGANIZATION', placeholder: 'Organization name', sub: false, callback: async (value) => {
