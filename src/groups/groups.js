@@ -132,9 +132,19 @@ export class Groups extends Component {
             <div class="group">
                 <h1>⇢ ${args.group.data.name}</h1>
                 <div class="section">
+                    ${args.users.map(user => {
+                        return `<div data-id="${user.id}">${user.name}</div>`;
+                    }).join('')}
+                </div>
+                <div class="section">
                     ${renderAdd(app, {text: 'ASSIGN USER', placeholder: 'Search for user name', sub: false, list: 'users', callback: async (value) => {
                         await this.assignUser(value, args.group);
                     }})}
+                </div>
+                <div class="section">
+                    ${args.boards.map(board => {
+                        return `<div data-id="${board.id}">${board.name}</div>`;
+                    }).join('')}
                 </div>
                 <div class="section">
                     ${renderAdd(app, {text: 'ASSIGN BOARD', placeholder: 'Search for board name', sub: false, list: 'boards', callback: async (value) => {
