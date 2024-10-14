@@ -146,14 +146,36 @@ export class Groups extends Component {
     
     }
 
+    /**
+     * Render group box
+     * app: app reference
+     * args.name: id - id of the organization
+     * args.name: string - name of the organization
+     * args.groups: Array - list of organization's groups
+     * args.users: Array - list of all users
+     * args.boards: Array - list of all boards
+     */
+
     renderOrganization(app, args) {
 
         // List groups
         if (args.groups.length) {
             return `
                 <h1><span class="mdi mdi-domain"></span> ${args.name}</h1>
-                ${args.groups.map((item, index) => {
-                    return this.renderGroup(app, { group: item, organization: args.id });
+                ${args.groups.map(group => {
+                    return this.renderGroup(app, {
+                        group,
+                        organization: args.id,
+                        // users: [{id: "3cfffeca-cd0f-4f4f-b993-3028c3922b59", name: 'User One'}],
+                        users: ('users' in group.data) ? group.data.users.map(userId => {
+                            const foundUser = args.users.find(u => u.key == userId);
+                            return {id: userId, name: foundUser.data.name};
+                         }) : [],
+                        boards: ('boards' in group.data) ? group.data.boards.map(boardId => {
+                            const foundBoard = args.boards.find(b => b.key == boardId);
+                            return {id: boardId, name: foundBoard.data.name};
+                         }) : []
+                    });
                 }).join('')}
                 <div class="group">
                     ${renderAdd(app, {text: 'ADD NEW GROUP', placeholder: 'Group name', sub: false, callback: async (value) => {
@@ -280,7 +302,9 @@ export class Groups extends Component {
                     return this.renderOrganization(app, {
                         id: item.key,
                         name: item.data.name,
-                        groups: groups.items.filter(group => group.data.organization == item.key)
+                        groups: groups.items.filter(group => group.data.organization == item.key),
+                        users: users.items,
+                        boards: boards.items
                     });
                 }).join('')}
                 <div class="group">
