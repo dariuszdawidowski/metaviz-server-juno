@@ -74,7 +74,7 @@ export class Groups extends Component {
         // List groups
         if (args.groups.length) {
             return `
-                <h1>⇢ ${args.name}</h1>
+                <h1><span class="mdi mdi-domain"></span> ${args.name}</h1>
                 ${args.groups.map((item, index) => {
                     return this.renderGroup(app, { id: item.key, name: item.data.name, organization: args.id });
                 }).join('')}
