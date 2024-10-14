@@ -50,7 +50,9 @@ export default defineDevConfig(() => ({
                 /**
                  * Groups
                  * name: string
-                 * organizations: [uuid, ...]
+                 * organization: uuid
+                 * users: [uuid, ...]
+                 * boards: [uuid, ...]
                  */
                 {
                     collection: 'groups',

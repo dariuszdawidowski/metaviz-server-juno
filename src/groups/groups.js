@@ -42,6 +42,82 @@ export class Groups extends Component {
         hideSpinner();
     }
 
+    // async findUser(name) {
+    //     const users = await listDocs({
+    //         collection: 'users'
+    //     });
+    //     let found = null;
+    //     for (const user of users.items) {
+    //         if (user.data.name == name) return user;
+    //     }
+    //     return null;
+    // }
+
+    /**
+     * Assign user to group
+     * userId : string - user uuid key
+     * group : Object - group
+     */
+
+    async assignUser(userId, group) {
+        showSpinner();
+        const user = await getDoc({
+            collection: 'users',
+            key: userId
+        });
+        if (user) {
+            if (!('users' in group.data)) group.data.users = [];
+            if (!group.data.users.includes(userId)) {
+                group.data.users.push(userId);
+                await setDoc({
+                    collection: 'groups',
+                    doc: {
+                        key: group.key,
+                        data: group.data,
+                        version: group.version
+                    }
+                });
+            }
+            this.update();
+        }
+        hideSpinner();
+    }
+
+    /**
+     * Assign board to group
+     * boardId : string - board key
+     * group : Object - group
+     */
+
+    async assignBoard(boardId, group) {
+        showSpinner();
+        const board = await getDoc({
+            collection: 'boards',
+            key: boardId
+        });
+        if (board) {
+            if (!('boards' in group.data)) group.data.boards = [];
+            if (!group.data.boards.includes(boardId)) {
+                group.data.boards.push(boardId);
+                await setDoc({
+                    collection: 'groups',
+                    doc: {
+                        key: group.key,
+                        data: group.data,
+                        version: group.version
+                    }
+                });
+            }
+            this.update();
+        }
+        hideSpinner();
+    }
+
+    /**
+     * Render single group icon
+     * group : Object - group
+     */
+
     renderGroupIcon(group) {
 
         return `
@@ -53,16 +129,24 @@ export class Groups extends Component {
 
     }
 
+    /**
+     * Render group box
+     * args.group : Object - group
+     * args.organization: string - organization id
+     */
+
     renderGroup(app, args) {
     
         return `
             <div class="group">
-                <h1>⇢ ${args.name}</h1>
+                <h1>⇢ ${args.group.data.name}</h1>
                 <div class="section">
                 </div>
-                ${renderAdd(app, {text: 'ASSIGN USER', placeholder: 'User name', sub: false, callback: async (value) => {
+                ${renderAdd(app, {text: 'ASSIGN USER', placeholder: 'Search for user name', sub: false, list: 'users', callback: async (value) => {
+                    await this.assignUser(value, args.group);
                 }})}
-                ${renderAdd(app, {text: 'ASSIGN BOARD', placeholder: 'Board name', sub: false, callback: async (value) => {
+                ${renderAdd(app, {text: 'ASSIGN BOARD', placeholder: 'Search for board name', sub: false, list: 'boards', callback: async (value) => {
+                    await this.assignBoard(value, args.group);
                 }})}
             </div>
         `;
@@ -76,7 +160,7 @@ export class Groups extends Component {
             return `
                 <h1><span class="mdi mdi-domain"></span> ${args.name}</h1>
                 ${args.groups.map((item, index) => {
-                    return this.renderGroup(app, { id: item.key, name: item.data.name, organization: args.id });
+                    return this.renderGroup(app, { group: item, organization: args.id });
                 }).join('')}
                 <div class="group">
                     ${renderAdd(app, {text: 'ADD NEW GROUP', placeholder: 'Group name', sub: false, callback: async (value) => {
@@ -177,6 +261,23 @@ export class Groups extends Component {
         const groups = await listDocs({
             collection: 'groups'
         });
+        const users = await listDocs({
+            collection: 'users'
+        });
+
+        // Generate lists
+        document.querySelector('#database').innerHTML = `
+            <datalist id="users">
+                ${users.items.toSorted((a, b) => a.data.name.localeCompare(b.data.name)).map(item => {
+                    return `<option value="${item.key}">${item.data.name}</option>`;
+                }).join('')}
+            </datalist>
+            <datalist id="boards">
+                ${boards.items.toSorted((a, b) => a.data.name.localeCompare(b.data.name)).map(item => {
+                    return `<option value="${item.key}">${item.data.name}</option>`;
+                }).join('')}
+            </datalist>
+        `;
 
         // Render organizations+groups right column
         if (organizations.items.length > 0) {

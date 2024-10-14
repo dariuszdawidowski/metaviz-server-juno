@@ -89,7 +89,7 @@ export const renderAdd = (app, args) => {
             <span class="plus">+</span><span class="add">${args.text}</span>
         </div>
         <div id="add-input-${id}" class="board-add" style="display: none;">
-            <input placeholder="${args.placeholder}"><button>OK</button>
+            <input placeholder="${args.placeholder}" ${('list' in args) ? 'list="' + args.list + '"' : ''}><button>OK</button>
         </div>
     `;
 };
