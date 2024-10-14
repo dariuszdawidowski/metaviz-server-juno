@@ -42,17 +42,6 @@ export class Groups extends Component {
         hideSpinner();
     }
 
-    // async findUser(name) {
-    //     const users = await listDocs({
-    //         collection: 'users'
-    //     });
-    //     let found = null;
-    //     for (const user of users.items) {
-    //         if (user.data.name == name) return user;
-    //     }
-    //     return null;
-    // }
-
     /**
      * Assign user to group
      * userId : string - user uuid key
@@ -133,6 +122,8 @@ export class Groups extends Component {
      * Render group box
      * args.group : Object - group
      * args.organization: string - organization id
+     * args.users: [uuid, ...] - list of assigned users
+     * args.boards: [uuid, ...] - list of assigned boards
      */
 
     renderGroup(app, args) {
@@ -141,13 +132,15 @@ export class Groups extends Component {
             <div class="group">
                 <h1>⇢ ${args.group.data.name}</h1>
                 <div class="section">
+                    ${renderAdd(app, {text: 'ASSIGN USER', placeholder: 'Search for user name', sub: false, list: 'users', callback: async (value) => {
+                        await this.assignUser(value, args.group);
+                    }})}
                 </div>
-                ${renderAdd(app, {text: 'ASSIGN USER', placeholder: 'Search for user name', sub: false, list: 'users', callback: async (value) => {
-                    await this.assignUser(value, args.group);
-                }})}
-                ${renderAdd(app, {text: 'ASSIGN BOARD', placeholder: 'Search for board name', sub: false, list: 'boards', callback: async (value) => {
-                    await this.assignBoard(value, args.group);
-                }})}
+                <div class="section">
+                    ${renderAdd(app, {text: 'ASSIGN BOARD', placeholder: 'Search for board name', sub: false, list: 'boards', callback: async (value) => {
+                        await this.assignBoard(value, args.group);
+                    }})}
+                </div>
             </div>
         `;
     
