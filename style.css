@@ -361,23 +361,23 @@ a .board-link, a:visited .board-link {
 
 /* Group icon */
 
-.group-icon, .user-icon {
+.group-icon, .user-icon, .board-icon {
     width: 100px;
     height: 100px;
     text-align: center;
 }
 
-.group-icon span, .user-icon span {
+.group-icon span, .user-icon span, .board-icon span {
     font-size: 50px;
 }
 
-.group-icon .group-name, .user-icon .user-name {
+.group-icon .group-name, .user-icon .user-name, .board-icon .user-name {
     text-align: center;
     font-weight: bold;
     font-size: 10px;
 }
 
-.group-icon:hover, .user-icon:hover {
+.group-icon:hover, .user-icon:hover, .board-icon:hover {
     color: var(--metaviz-color-cyan);
 }
 

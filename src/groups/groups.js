@@ -119,6 +119,38 @@ export class Groups extends Component {
     }
 
     /**
+     * Render single user icon
+     * user : Object - user
+     */
+
+    renderUserIcon(user) {
+
+        return `
+            <div class="user-icon" data-user="${user.id}">
+                <span class="mdi mdi-account"></span>
+                <div class="user-name">${user.name}</div>
+            </div>
+        `;
+
+    }
+
+    /**
+     * Render single board icon
+     * board : Object - board
+     */
+
+    renderBoardIcon(board) {
+
+        return `
+            <div class="board-icon" data-board="${board.id}">
+                <span class="mdi mdi-bulletin-board"></span>
+                <div class="board-name">${board.name}</div>
+            </div>
+        `;
+
+    }
+
+    /**
      * Render group box
      * args.group : Object - group
      * args.organization: string - organization id
@@ -133,17 +165,17 @@ export class Groups extends Component {
                 <h1>⇢ ${args.group.data.name}</h1>
                 <div class="section">
                     ${args.users.map(user => {
-                        return `<div data-id="${user.id}">${user.name}</div>`;
+                        return this.renderUserIcon(user);
                     }).join('')}
                 </div>
-                <div class="section">
+                <div class="section" style="margin-bottom: 30px;">
                     ${renderAdd(app, {text: 'ASSIGN USER', placeholder: 'Search for user name', sub: false, list: 'users', callback: async (value) => {
                         await this.assignUser(value, args.group);
                     }})}
                 </div>
                 <div class="section">
                     ${args.boards.map(board => {
-                        return `<div data-id="${board.id}">${board.name}</div>`;
+                        return this.renderBoardIcon(board);
                     }).join('')}
                 </div>
                 <div class="section">
